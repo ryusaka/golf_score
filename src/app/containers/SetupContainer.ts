@@ -16,12 +16,12 @@ const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
     background: theme.palette.grey[200],
-    padding: '70px 0',
+    padding: '60px 0',
     overflowY: 'scroll',
   },
   main: {
     overflowY: 'scroll',
-    padding: '20px 0',
+    padding: '15px 0',
     margin: 10,
   },
   avatars: {
@@ -43,7 +43,7 @@ const styles = (theme: Theme) => createStyles({
   },
   hole: {
     width: '100%',
-    padding: '10px 20px',
+    padding: '5px 20px',
     display: 'flex',
     alignItems: 'center',
     '&:nth-child(even)': {

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
+import * as H from 'history'
 import {
   withStyles,
   WithStyles,
@@ -15,8 +16,9 @@ import Result from 'components/Result'
 const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
-    paddingTop: 70,
+    paddingTop: 60,
     background: theme.palette.grey[200],
+    overflowY: 'scroll',
   },
   main: {
     padding: 10,
@@ -82,12 +84,16 @@ const styles = (theme: Theme) => createStyles({
   iron: {
     background: '#034358',
   },
+  toTop: {
+    marginTop: 10,
+  },
 })
 
 export interface Props extends WithStyles<typeof styles> {
   field: IField
   players: IPlayer[]
   scores: IScores[]
+  history: H.History
 }
 
 export default compose(

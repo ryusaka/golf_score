@@ -6,7 +6,9 @@
     "dev:api": "forever -c 'node --inspect' --minUptime 1000 --spinSleepTime 10000 -w --watchDir=built/api built/api/server.js",
     "mongo": "node --experimental-repl-await built/api/repl.js",
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
-    "build": "webpack"
+    "start": "node ./src/api/server.js",
+    "build": "webpack --config webpack.config.js",
+    "heroku-postbuild": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.2",

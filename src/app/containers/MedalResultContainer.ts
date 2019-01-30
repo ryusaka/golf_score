@@ -14,7 +14,7 @@ import MedalResult from 'components/MedalResult'
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    marginTop: 20
+    marginTop: 10
   },
   table: {
   },

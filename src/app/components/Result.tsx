@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { Props } from 'containers/ResultContainer'
 import Header from 'containers/HeaderContainer'
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar } from '@material-ui/core'
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar, Button } from '@material-ui/core'
 import classname from 'lib/classname'
 import MedalResult from 'containers/MedalResultContainer'
 const Result: React.FunctionComponent<Props> = (props) => {
-  const { scores, players, classes } = props
+  const { scores, players, field, classes } = props
   const getClass = medal => {
     if (medal === 'D') return classes.diamond
     if (medal === '金') return classes.gold
@@ -24,8 +24,16 @@ const Result: React.FunctionComponent<Props> = (props) => {
           <Table className={classes.table}>
             <TableHead>
               <TableRow>
-                <TableCell className={classes.name} />
-                {new Array(9).fill(0).map((_, idx) => <TableCell key={idx} className={classes.score}>{idx + 1}</TableCell>)}
+                <TableCell className={classes.name}>
+                  <div>HOLE</div>
+                  <div>(PAR)</div>
+                </TableCell>
+                {new Array(9).fill(0).map((_, idx) =>
+                  <TableCell key={idx} className={classes.score}>
+                    <div>{idx + 1}</div>
+                    <div>({field.holes[idx].par})</div>
+                  </TableCell>
+                )}
                 <TableCell className={classes.total}>計</TableCell>
               </TableRow>
             </TableHead>
@@ -43,6 +51,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
           </Table>
         </Paper>
         <MedalResult />
+        <Button className={classes.toTop} fullWidth color='primary' variant='contained' onClick={() => props.history.push('/')}>トップに戻る</Button>
       </div>
     </div>
   )

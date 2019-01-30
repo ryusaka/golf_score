@@ -20,7 +20,8 @@ const styles = (theme: Theme) => createStyles({
     marginTop: 5,
   },
   root: {
-    padding: '70px 0',
+    overflowY: 'scroll',
+    padding: '60px 0',
     width: '100%',
     height: '100%',
     background: theme.palette.grey[200],
@@ -29,7 +30,7 @@ const styles = (theme: Theme) => createStyles({
     width: 300,
   },
   paper: {
-    padding: 10,
+    padding: 5,
     margin: '5px 10px',
     borderRadius: 3,
   },
