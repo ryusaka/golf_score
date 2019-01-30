@@ -13,10 +13,12 @@ import { IPlayer, IScores } from 'lib/interfaces'
 import { increment, decrement } from 'modules/score'
 
 const styles = (theme: Theme) => createStyles({
-  root: {
+  main: {
     display: 'flex',
+    alignItems: 'center',
   },
   name: {
+    marginLeft: 10,
     fontSize: 16,
     flex: 1,
     marginBottom: 20,
@@ -24,11 +26,12 @@ const styles = (theme: Theme) => createStyles({
   score: {
     flex: 1,
     textAlign: 'center',
+    fontSize: 22,
   },
   scoreElem: {
     display: 'flex',
     alignItems: 'center',
-    flex: 1,
+    width: 180,
     marginLeft: 10,
   },
   scoreButtonIcon: {

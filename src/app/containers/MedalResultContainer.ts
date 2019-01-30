@@ -10,20 +10,11 @@ import {
 import { ReduxState } from 'lib/store'
 import { IPlayer, IScores, IField } from 'lib/interfaces'
 
-import Result from 'components/Result'
+import MedalResult from 'components/MedalResult'
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    height: '100%',
-    paddingTop: 70,
-    background: theme.palette.grey[200],
-  },
-  main: {
-    padding: 10,
-  },
-  title: {
-    color: theme.palette.grey[800],
-    textAlign: 'center',
+    marginTop: 20
   },
   table: {
   },
@@ -33,6 +24,10 @@ const styles = (theme: Theme) => createStyles({
   name: {
     padding: 0,
     width: 60,
+  },
+  title: {
+    color: theme.palette.grey[800],
+    textAlign: 'center',
   },
   score: {
     padding: 0,
@@ -55,20 +50,20 @@ const styles = (theme: Theme) => createStyles({
       padding: 0,
     },
   },
-  medal: {
-    fontSize: 14,
-    width: 24,
-    height: 24,
-    margin: 'auto',
-    color: theme.palette.common.white,
-  },
   row: {
     height: 40,
   },
+  medal: {
+    margin: 'auto',
+    fontSize: 16,
+    height: 32,
+    width: 32,
+    color: theme.palette.common.white,
+  },
   diamond: {
-    background: '#efefef',
-    color: theme.palette.grey[600],
     border: `1px solid ${theme.palette.grey[600]}`,
+    color: theme.palette.grey[600],
+    background: '#efefef',
   },
   gold: {
     background: '#e6b422',
@@ -97,4 +92,4 @@ export default compose(
     field: state.field,
     scores: state.score.scores,
   }))
-)(Result)
+)(MedalResult)

@@ -16,6 +16,7 @@ export default class Score extends React.Component<Props, State> {
   }
 
   getClassName = (medal) => {
+    if (medal === 'D') return this.props.classes.diamond
     if (medal === '金') return this.props.classes.gold
     if (medal === '銀') return this.props.classes.silver
     if (medal === '銅') return this.props.classes.blonze
@@ -27,7 +28,7 @@ export default class Score extends React.Component<Props, State> {
     const { classes, player, medalSelect, hole, score } = this.props
     return (
       <div className={classes.olympic}>
-        {['金', '銀', '銅', '鉄'].map(medal =>
+        {['D', '金', '銀', '銅', '鉄'].map(medal =>
           <Avatar
             key={medal}
             onClick={() => medalSelect(medal, player, hole)}

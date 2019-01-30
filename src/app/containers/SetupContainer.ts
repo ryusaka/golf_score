@@ -15,13 +15,14 @@ import Setup from 'components/Setup'
 const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
-    paddingBottom: 65,
+    background: theme.palette.grey[200],
+    padding: '70px 0',
+    overflowY: 'scroll',
   },
   main: {
-    height: '100%',
     overflowY: 'scroll',
-    paddingTop: 20,
-    paddingBottom: 70,
+    padding: '20px 0',
+    margin: 10,
   },
   avatars: {
     display: 'flex',
@@ -33,6 +34,7 @@ const styles = (theme: Theme) => createStyles({
     padding: 0,
   },
   header: {
+    padding: 10,
     display: 'flex',
     flexDirection: 'column',
   },
@@ -40,10 +42,13 @@ const styles = (theme: Theme) => createStyles({
     background: theme.palette.primary.main,
   },
   hole: {
-    width: 200,
+    width: '100%',
+    padding: '10px 20px',
     display: 'flex',
     alignItems: 'center',
-    margin: '0 auto 10px',
+    '&:nth-child(even)': {
+      background: theme.palette.grey[200],
+    },
   },
   holeNumber: {
     width: 50,
@@ -53,12 +58,14 @@ const styles = (theme: Theme) => createStyles({
   },
   submitButton: {
     position: 'fixed',
-    left: 10,
-    bottom: 10,
-    right: 10,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    padding: 10,
     display: 'flex',
     flexDirection: 'column',
     background: theme.palette.common.white,
+    borderRadius: 0,
   },
   button: {
     height: 50,

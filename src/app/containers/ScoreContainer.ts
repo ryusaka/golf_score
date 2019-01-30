@@ -14,38 +14,38 @@ import { IField, IPlayer } from 'lib/interfaces'
 import Score from 'components/Score'
 
 const styles = (theme: Theme) => createStyles({
-  root: {
+  main: {
     display: 'flex',
     flexDirection: 'column',
+    marginTop: 5,
+  },
+  root: {
+    padding: '70px 0',
     width: '100%',
-    paddingTop: 5,
+    height: '100%',
+    background: theme.palette.grey[200],
   },
   textField: {
     width: 300,
   },
-  player: {
+  paper: {
     padding: 10,
     margin: '5px 10px',
-    border: `1px solid ${theme.palette.grey[300]}`,
     borderRadius: 3,
-    background: theme.palette.grey[100],
   },
   bottom: {
     position: 'fixed',
-    left: 10,
-    bottom: 10,
-    right: 10,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    padding: 10,
     display: 'flex',
+    borderRadius: 0,
     background: theme.palette.common.white,
   },
   button: {
     flex: 1,
     height: 50,
-  },
-  now: {
-    flex: 1,
-    color: theme.palette.common.black,
-    textAlign: 'center',
   },
 })
 

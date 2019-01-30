@@ -5,7 +5,8 @@
     "dev:ts-api": "tsc --watch src/api/*.ts --outDir built --target es2016 --module commonjs",
     "dev:api": "forever -c 'node --inspect' --minUptime 1000 --spinSleepTime 10000 -w --watchDir=built/api built/api/server.js",
     "mongo": "node --experimental-repl-await built/api/repl.js",
-    "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'"
+    "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
+    "build": "webpack"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.2",

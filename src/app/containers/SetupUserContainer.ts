@@ -16,20 +16,29 @@ import { ReduxState } from 'lib/store';
 
 const styles = (theme: Theme) => createStyles ({
   root: {
+    background: theme.palette.grey[200],
+    padding: '70px 0',
+    height: '100%',
+  },
+  main: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: 20,
+    margin: 10,
+    padding: '30px 20px 20px',
+    background: theme.palette.common.white,
     marginBottom: 50,
   },
   submitButton: {
     position: 'fixed',
-    left: 10,
-    bottom: 10,
-    right: 10,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    padding: 10,
     display: 'flex',
     flexDirection: 'column',
     background: theme.palette.common.white,
+    borderRadius: 0,
   },
   textField: {
     width: '100%',

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button } from '@material-ui/core'
+import { Button, Paper } from '@material-ui/core'
 import BackIcon from '@material-ui/icons/ChevronLeft'
 import ForwardIcon from '@material-ui/icons/ChevronRight'
 
@@ -24,27 +24,27 @@ export default class Score extends React.Component<Props, State> {
   }
 
   render() {
-    const { classes, players, now } = this.props
+    const { classes, players, now, field } = this.props
     return (
-      <>
-        <Header><div className={classes.now}>{now}番ホール</div></Header>
-        <div className={classes.root}>
+      <div className={classes.root}>
+        <Header><h3>HOLE: <span style={{fontSize: 24, marginRight: 10}}>{now}</span> PAR: <span style={{fontSize: 24}}>{field.holes[now - 1].par}</span></h3></Header>
+        <div className={classes.main}>
           {players.map(p => (
-            <div key={p.id} className={classes.player}>
+            <Paper key={p.id} className={classes.paper} elevation={1}>
               <ScoreInput player={p} />
-            </div>
+            </Paper>
           ))}
         </div>
-        <div className={classes.bottom}>
+        <Paper className={classes.bottom}>
           <Button disabled={now <= 1} className={classes.button} color='primary' variant='contained' onClick={() => this.props.back()}><BackIcon />{now !== 1 ? now - 1 : ''}</Button>
           <div style={{width: 10}} />
           {now === 9 ?
-            <Button className={classes.button} color='primary' variant='contained' onClick={this.finish}><ForwardIcon />終了</Button>
+            <Button className={classes.button} color='secondary' variant='contained' onClick={this.finish}>終了</Button>
           :
             <Button className={classes.button} color='primary' variant='contained' onClick={() => this.props.forward()}><ForwardIcon />{now + 1}</Button>
           }
-        </div>
-      </>
+        </Paper>
+      </div>
     )
   }
 }

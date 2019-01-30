@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'connected-react-router'
 
 import theme from 'lib/theme'
 import { history, store } from 'lib/store'
-import TopPage from 'components/TopPage'
+import TopPage from 'containers/TopPageContainer'
 import Score from 'containers/ScoreContainer'
 import Setup from 'containers/SetupContainer'
 import Result from 'containers/ResultContainer'

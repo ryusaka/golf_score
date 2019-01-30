@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   Button,
   TextField,
+  Paper,
 } from '@material-ui/core'
 import { Props, State } from 'containers/SetupUserContainer'
 import Header from 'containers/HeaderContainer'
@@ -29,19 +30,19 @@ export default class Setup extends React.Component<Props, State> {
   render() {
     const { classes } = this.props
     return (
-      <>
+      <div className={classes.root}>
         <Header>
           <h2>名前入力</h2>
         </Header>
-        <div className={classes.root}>
+        <Paper className={classes.main}>
           {[1, 2, 3, 4].map(p => (
             <TextField onChange={this.onChangeText(p)} key={p} variant='outlined' value={this.state.players[p - 1]} label={`Player${p}`} className={classes.textField} type='text' />
           ))}
-        </div>
-        <div className={classes.submitButton}>
+        </Paper>
+        <Paper className={classes.submitButton}>
           <Button color='primary' className={classes.button} variant='contained' onClick={this.submit}>決定</Button>
-        </div>
-      </>
+        </Paper>
+      </div>
     )
   }
 }

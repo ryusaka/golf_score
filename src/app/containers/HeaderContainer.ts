@@ -7,10 +7,12 @@ export interface Props extends WithStyles<typeof styles>, React.Props<{}> {
 }
 const styles = (theme: Theme) => createStyles({
   appbar: {
+    borderRadius: 0,
+    height: 70,
     background: theme.palette.common.white,
-    borderBottom: `1px solid ${theme.palette.grey[300]}`,
   },
   toolbar: {
+    height: 70,
     justifyContent: 'center',
     color: theme.palette.grey[800],
   },

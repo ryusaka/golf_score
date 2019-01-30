@@ -6,7 +6,7 @@ import { Props } from 'containers/HeaderContainer'
 const Header: React.FunctionComponent<Props> = (props) => {
   const { classes, children } = props
   return (
-    <AppBar position="static" className={classes.appbar} elevation={0}>
+    <AppBar position='fixed' className={classes.appbar} elevation={1}>
       <Toolbar className={classes.toolbar}>
         {children}
       </Toolbar>

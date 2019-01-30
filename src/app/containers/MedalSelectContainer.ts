@@ -20,6 +20,10 @@ const styles = (theme: Theme) => createStyles({
   },
   olympic: {
     display: 'flex',
+    padding: 5,
+    border: `1px solid ${theme.palette.grey[200]}`,
+    background: theme.palette.common.white,
+    borderRadius: 3,
   },
   medal: {
     fontSize: 14,
@@ -30,6 +34,11 @@ const styles = (theme: Theme) => createStyles({
     padding: 5,
     border: `1px solid ${theme.palette.grey[300]}`,
     marginRight: 5,
+  },
+  diamond: {
+    background: '#efefef',
+    color: theme.palette.grey[600],
+    border: `1px solid ${theme.palette.grey[600]}`,
   },
   gold: {
     background: '#e6b422',
