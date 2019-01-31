@@ -8,7 +8,7 @@
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
     "start": "node ./src/api/server.js",
     "build": "webpack --config webpack.config.js",
-    "heroku-postbuild": "webpack --config webpack.config.js"
+    "heroku-postbuild": "webpack --config webpack.config.js; rm ./dist/*.map"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
