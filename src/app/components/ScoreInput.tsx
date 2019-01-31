@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IconButton, Avatar } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import PlusIcon from '@material-ui/icons/AddCircle'
 import MinusIcon from '@material-ui/icons/RemoveCircle'
 
