@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Props } from 'containers/MedalResultContainer'
-import Header from 'containers/HeaderContainer'
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar } from '@material-ui/core'
 import classname from 'lib/classname'
 
@@ -44,7 +43,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
           <TableBody>
             {scores.map(score => (
               <TableRow key={score.player} className={classes.row}>
-                <TableCell className={classes.name} component="th" scope="row">
+                <TableCell className={classes.name} component='th' scope='row'>
                   {players.find(p => p.id === score.player).name}
                 </TableCell>
                 {['D', '金', '銀', '銅', '鉄'].map(medal => <TableCell key={`player_${medal}`} className={classes.score}>{score.scores.filter(s => s.medal === medal).length}</TableCell>)}

@@ -7,12 +7,9 @@ import {
 
 import { IPlayer, IScores, IField } from 'lib/interfaces'
 
-import MedalResult from 'components/MedalResult'
+import ScoreResult from 'components/ScoreResult'
 
-const styles = (theme: Theme) => createStyles({
-  root: {
-    marginTop: 10
-  },
+export const styles = (theme: Theme) => createStyles({
   table: {
   },
   paper: {
@@ -21,10 +18,6 @@ const styles = (theme: Theme) => createStyles({
   name: {
     padding: 0,
     width: 60,
-  },
-  title: {
-    color: theme.palette.grey[800],
-    textAlign: 'center',
   },
   score: {
     padding: 0,
@@ -47,20 +40,20 @@ const styles = (theme: Theme) => createStyles({
       padding: 0,
     },
   },
+  medal: {
+    fontSize: 14,
+    width: 24,
+    height: 24,
+    margin: 'auto',
+    color: theme.palette.common.white,
+  },
   row: {
     height: 40,
   },
-  medal: {
-    margin: 'auto',
-    fontSize: 16,
-    height: 32,
-    width: 32,
-    color: theme.palette.common.white,
-  },
   diamond: {
-    border: `1px solid ${theme.palette.grey[600]}`,
-    color: theme.palette.grey[600],
     background: '#efefef',
+    color: theme.palette.grey[600],
+    border: `1px solid ${theme.palette.grey[600]}`,
   },
   gold: {
     background: '#e6b422',
@@ -82,4 +75,4 @@ export interface Props extends WithStyles<typeof styles> {
   scores: IScores[]
 }
 
-export default withStyles(styles)(MedalResult)
+export default withStyles(styles)(ScoreResult)

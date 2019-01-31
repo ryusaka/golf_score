@@ -13,11 +13,6 @@ import { IPlayer, IScores } from 'lib/interfaces'
 import { medalSelect } from 'modules/score'
 
 const styles = (theme: Theme) => createStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
   olympic: {
     display: 'flex',
     padding: 5,
@@ -74,7 +69,6 @@ const mapDispatchToProps = {
 export default compose(
   withStyles(styles),
   connect((state: ReduxState) => ({
-    scores: state.score.scores,
     hole: state.score.now
   }), mapDispatchToProps)
 )(MedalSelect)

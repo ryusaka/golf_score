@@ -1,10 +1,5 @@
 import * as React from 'react'
-import {
-  TextField,
-  Button,
-  IconButton,
-  Avatar,
-} from '@material-ui/core'
+import { Avatar } from '@material-ui/core'
 import classname from 'lib/classname'
 import { State, Props } from 'containers/MedalSelectContainer'
 

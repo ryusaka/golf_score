@@ -43,6 +43,7 @@ export default class TopPage extends React.Component<Props, State> {
           />
           <div className={classes.buttonWrap}>
             <Button className={classes.button} fullWidth variant='contained' color='primary' onClick={this.onSubmit}>開始</Button>
+            <Button className={classes.button} fullWidth variant='contained' color='primary' onClick={() => this.props.history.push('/histories')}>履歴を見る</Button>
           </div>
         </Paper>
       </div>

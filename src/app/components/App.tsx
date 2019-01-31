@@ -11,6 +11,7 @@ import Score from 'containers/ScoreContainer'
 import Setup from 'containers/SetupContainer'
 import Result from 'containers/ResultContainer'
 import SetupUser from 'containers/SetupUserContainer'
+import HistoryPage from 'containers/HistoryContainer'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path='/setup-user' component={SetupUser} />
             <Route path='/score' component={Score} />
             <Route path='/result' component={Result} />
+            <Route path='/histories' component={HistoryPage} />
             <Route path='/' component={TopPage} />
           </Switch>
         </ConnectedRouter>

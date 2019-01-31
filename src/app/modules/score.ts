@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux'
 import { IScores, IScoreStore, IPlayer } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
-import { ReduxState } from 'lib/store';
+import { ReduxState, store } from 'lib/store'
 export type State = IScoreStore
 
 export enum ScoreActions {
@@ -14,13 +14,14 @@ export enum ScoreActions {
   INCREMENT ='score/increment',
   DECREMENT ='score/decrement',
   FINISH = 'score/finish',
+  SAVE = 'score/save',
+  HISTORY_REMOVE = 'score/historyRemove',
 }
 
 export interface LoadAction extends Action {
   type: ScoreActions.LOAD
   score: IScores
 }
-
 export const load = (score: IScores) => {
   return (dispatch) => {
     dispatch({type: ScoreActions.LOAD, score})
@@ -109,7 +110,32 @@ export const finish = () => {
   }
 }
 
-export type Actions = LoadAction | LoadAllAction | ForwardAction | BackAction | MedalSelectAction | ResetAction | IncrementAction | DecrementAction | FinishAction
+interface SaveAction extends Action {
+  type: ScoreActions.SAVE
+  history: any
+}
+export const save = () => {
+  return (dispatch: Dispatch, getState: () => ReduxState) => {
+    const history = getStore('history') || []
+    const currentStore = getState()
+    history.push(Object.assign({date: new Date()}, currentStore))
+    dispatch<SaveAction>({type: ScoreActions.SAVE, history})
+  }
+}
+
+interface HistoryRemoveAction extends Action {
+  type: ScoreActions.HISTORY_REMOVE
+  history: any
+}
+export const removeHistory = (index: number) => {
+  return (dispatch: Dispatch) => {
+    const history = getStore('history') || []
+    history.splice(index, 1)
+    dispatch<HistoryRemoveAction>({type: ScoreActions.HISTORY_REMOVE, history})
+  }
+}
+
+export type Actions = LoadAction | LoadAllAction | ForwardAction | BackAction | MedalSelectAction | ResetAction | IncrementAction | DecrementAction | FinishAction | SaveAction | HistoryRemoveAction
 
 const init = (players) => {
   const scores: IScores[] = players.map(p => ({
@@ -193,6 +219,14 @@ const reducer = (state: State = initialState, action: Actions): State => {
       const store = init(action.players)
       setStore('score', store)
       return store
+    }
+    case ScoreActions.SAVE: {
+      setStore('history', action.history)
+      return state
+    }
+    case ScoreActions.HISTORY_REMOVE: {
+      setStore('history', action.history)
+      return state
     }
     default: return state
   }
