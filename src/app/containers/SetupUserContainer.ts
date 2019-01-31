@@ -17,7 +17,7 @@ import { ReduxState } from 'lib/store';
 const styles = (theme: Theme) => createStyles ({
   root: {
     background: theme.palette.grey[200],
-    padding: '60px 0',
+    padding: '60px 0 70px',
     height: '100%',
   },
   main: {

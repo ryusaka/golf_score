@@ -4,7 +4,7 @@ import classname from 'lib/classname'
 import { Props } from 'containers/ScoreResultContainer'
 
 const Result: React.FunctionComponent<Props> = (props) => {
-  const { scores, players, field, classes } = props
+  const { scores, players, field, elevation = 1, classes } = props
   const getClass = medal => {
     if (medal === 'D') return classes.diamond
     if (medal === '金') return classes.gold
@@ -15,7 +15,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
   }
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={classes.paper} elevation={elevation}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>

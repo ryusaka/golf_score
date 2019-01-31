@@ -73,6 +73,7 @@ export interface Props extends WithStyles<typeof styles> {
   field: IField
   players: IPlayer[]
   scores: IScores[]
+  elevation?: number
 }
 
 export default withStyles(styles)(ScoreResult)

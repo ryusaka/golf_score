@@ -31,7 +31,7 @@ export default class TopPage extends React.Component<Props, State> {
     const { classes } = this.props
     return (
       <div className={classes.root}>
-        <Header><h2>スコア管理</h2></Header>
+        <Header><h1 style={{fontSize: 24}}>スコア管理</h1></Header>
         <Paper elevation={1} className={classes.paper}>
           <h2 className={classes.title}>コース名</h2>
           <TextField

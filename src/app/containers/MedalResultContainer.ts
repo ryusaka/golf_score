@@ -11,7 +11,6 @@ import MedalResult from 'components/MedalResult'
 
 const styles = (theme: Theme) => createStyles({
   root: {
-    marginTop: 10
   },
   table: {
   },
@@ -21,10 +20,6 @@ const styles = (theme: Theme) => createStyles({
   name: {
     padding: 0,
     width: 60,
-  },
-  title: {
-    color: theme.palette.grey[800],
-    textAlign: 'center',
   },
   score: {
     padding: 0,
@@ -48,7 +43,7 @@ const styles = (theme: Theme) => createStyles({
     },
   },
   row: {
-    height: 40,
+    height: 36,
   },
   medal: {
     margin: 'auto',
@@ -80,6 +75,7 @@ export interface Props extends WithStyles<typeof styles> {
   field: IField
   players: IPlayer[]
   scores: IScores[]
+  elevation?: number
 }
 
 export default withStyles(styles)(MedalResult)

@@ -29,9 +29,15 @@ const styles = (theme: Theme) => createStyles({
   details: {
     display: 'flex',
     flexDirection: 'column',
+    padding: 5,
   },
   expansion: {
     margin: '5px 10px',
+  },
+  border: {
+    border: `1px solid ${theme.palette.grey[300]}`,
+    borderRadius: 3,
+    marginBottom: 5,
   },
   footer: {
     width: '100%',

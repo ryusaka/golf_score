@@ -36,7 +36,7 @@ export default class History extends React.Component<Props, State> {
     return (
       <>
         <div className={classes.root}>
-          <Header><h2>スコア一覧</h2></Header>
+          <Header><h2 style={{fontSize: 24}}>スコア履歴</h2></Header>
           <div className={classes.main}>
             {logs.map((h, idx) =>
               <ExpansionPanel key={moment(h.date).toString()} className={classes.expansion}>
@@ -47,8 +47,14 @@ export default class History extends React.Component<Props, State> {
                   </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails className={classes.details}>
-                  <ScoreResult scores={h.score.scores} players={h.player.players} field={h.field} />
-                  <MedalResult scores={h.score.scores} players={h.player.players} field={h.field} />
+                  <h3>スコア</h3>
+                  <div className={classes.border}>
+                    <ScoreResult scores={h.score.scores} players={h.player.players} field={h.field} elevation={0} />
+                  </div>
+                  <h3>オリンピック</h3>
+                  <div className={classes.border}>
+                    <MedalResult scores={h.score.scores} players={h.player.players} field={h.field} elevation={0} />
+                    </div>
                 </ExpansionPanelDetails>
                 <Divider />
                 <ExpansionPanelActions>

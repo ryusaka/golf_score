@@ -16,7 +16,7 @@ const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
     background: theme.palette.grey[200],
-    padding: '60px 0',
+    padding: '60px 0 70px',
     overflowY: 'scroll',
   },
   main: {

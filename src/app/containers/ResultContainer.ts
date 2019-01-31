@@ -17,7 +17,7 @@ import Result from 'components/Result'
 export const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
-    paddingTop: 60,
+    padding: '60px 0',
     background: theme.palette.grey[200],
     overflowY: 'scroll',
   },
@@ -25,6 +25,7 @@ export const styles = (theme: Theme) => createStyles({
     padding: 10,
   },
   title: {
+    marginTop: 10,
     color: theme.palette.grey[800],
     textAlign: 'center',
   },

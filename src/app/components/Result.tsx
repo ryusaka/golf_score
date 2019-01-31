@@ -10,13 +10,14 @@ const Result: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <Header><h2>RESULT</h2></Header>
+      <Header><h1 style={{fontSize: 24}}>RESULT</h1></Header>
       <div className={classes.main}>
         <h3 className={classes.title}>スコア</h3>
         <ScoreResult scores={scores} players={players} field={field} />
+        <h3 className={classes.title}>オリンピック</h3>
         <MedalResult scores={scores} players={players} field={field} />
-        <ResultFooter />
       </div>
+      <ResultFooter />
     </div>
   )
 }

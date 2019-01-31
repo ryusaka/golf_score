@@ -40,7 +40,7 @@ export default class Setup extends React.Component<Props, State> {
       <div className={classes.root}>
         <Header>
           <div className={classes.header}>
-            <h2 style={{textAlign: 'center'}}>コース情報入力</h2>
+            <h1 style={{fontSize: 24, textAlign: 'center'}}>コース情報入力</h1>
             <h3 style={{textAlign: 'center'}}>{field.name}</h3>
           </div>
         </Header>

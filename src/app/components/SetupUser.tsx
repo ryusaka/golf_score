@@ -32,7 +32,7 @@ export default class Setup extends React.Component<Props, State> {
     return (
       <div className={classes.root}>
         <Header>
-          <h2>名前入力</h2>
+          <h1 style={{fontSize: 24}}>名前入力</h1>
         </Header>
         <Paper className={classes.main}>
           {[1, 2, 3, 4].map(p => (

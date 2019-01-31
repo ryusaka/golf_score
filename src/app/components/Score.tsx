@@ -27,7 +27,12 @@ export default class Score extends React.Component<Props, State> {
     const { classes, players, now, field } = this.props
     return (
       <div className={classes.root}>
-        <Header><h3>HOLE: <span style={{fontSize: 24, marginRight: 10}}>{now}</span> PAR: <span style={{fontSize: 24}}>{field.holes[now - 1].par}</span></h3></Header>
+        <Header>
+          <div style={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
+            <h1 style={{fontSize: 22}}>Score</h1>
+            <h3>HOLE: <span style={{fontSize: 24, marginRight: 10}}>{now}</span> PAR: <span style={{fontSize: 24}}>{field.holes[now - 1].par}</span></h3>
+          </div>
+        </Header>
         <div className={classes.main}>
           {players.map(p => (
             <Paper key={p.id} className={classes.paper} elevation={1}>
