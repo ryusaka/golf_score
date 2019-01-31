@@ -36,6 +36,7 @@ const styles = (theme: Theme) => createStyles({
   },
   button: {
     height: 40,
+    marginTop: 20,
   },
   buttonWrap: {
     width: '100%',
