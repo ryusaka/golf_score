@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import compose from 'recompose/compose'
 import * as H from 'history'
 import { WithStyles } from '@material-ui/core'
@@ -8,7 +7,6 @@ import {
   Theme,
 } from '@material-ui/core'
 import { green } from '@material-ui/core/colors'
-import { save } from 'modules/score'
 import ResultFooter from 'components/ResultFooter'
 import { withRouter } from 'react-router'
 
@@ -48,16 +46,12 @@ const styles = (theme: Theme) => createStyles({
 })
 
 export interface State {
-  saved: boolean
-  snack: boolean
 }
 export interface Props extends WithStyles<typeof styles> {
-  save: () => void
   history: H.History
 }
 
 export default compose(
   withRouter,
   withStyles(styles),
-  connect(null, { save })
 )(ResultFooter)

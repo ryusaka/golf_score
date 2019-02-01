@@ -20,6 +20,7 @@ export default class Score extends React.Component<Props, State> {
 
   finish = () => {
     this.props.finish()
+    this.props.save()
     this.props.history.push('/result')
   }
 

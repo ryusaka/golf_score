@@ -7,7 +7,7 @@ import {
   Theme,
 } from '@material-ui/core'
 import { load as loadField } from 'modules/field'
-import { back, forward, finish } from 'modules/score'
+import { back, forward, finish, save } from 'modules/score'
 
 import { ReduxState } from 'lib/store'
 import { IField, IPlayer } from 'lib/interfaces'
@@ -61,6 +61,7 @@ export interface Props extends WithStyles<typeof styles> {
   back: () => void
   forward: () => void
   finish: () => void
+  save: () => void
 }
 
 const mapDispatchToProps = {
@@ -68,6 +69,7 @@ const mapDispatchToProps = {
   back,
   forward,
   finish,
+  save,
 }
 
 export default withStyles(styles)(connect((state: ReduxState) => ({

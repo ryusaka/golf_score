@@ -10,7 +10,6 @@ import {
 
 import { ReduxState } from 'lib/store'
 import { IPlayer, IScores, IField } from 'lib/interfaces'
-import { save } from 'modules/score'
 
 import Result from 'components/Result'
 
@@ -36,7 +35,6 @@ export interface Props extends WithStyles<typeof styles> {
   players: IPlayer[]
   scores: IScores[]
   history: H.History
-  save?: () => void
 }
 
 export default compose(
@@ -45,5 +43,5 @@ export default compose(
     players: state.player.players,
     field: state.field,
     scores: state.score.scores,
-  }), { save })
+  }))
 )(Result)

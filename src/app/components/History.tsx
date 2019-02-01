@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Button, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, ExpansionPanelActions, Dialog, DialogContent, DialogActions } from '@material-ui/core'
 import Header from 'containers/HeaderContainer'
 import * as storage from 'lib/storage'
-import moment from 'moment'
+import * as moment from 'moment'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import { Props, State } from 'containers/HistoryContainer'
