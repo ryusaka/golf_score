@@ -6,7 +6,12 @@ const webpack = require('webpack')
 
 module.exports = {
   mode: 'production',
-  entry: './src/app/index.tsx',
+  entry: {
+    bundle: [
+      '@babel/polyfill',
+      './src/app/index.tsx',
+    ],
+  },
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js'
@@ -15,7 +20,31 @@ module.exports = {
   module: {
     rules: [{
       test: /\.tsx?$/,
-      use: 'ts-loader'
+      use: [{
+        loader: "babel-loader",
+        options: {
+          cacheDirectory: true,
+          presets: [
+            '@babel/preset-react',
+            ['@babel/preset-env', {
+              targets: {
+                browsers: ['last 2 versions', '> 1%'],
+              },
+              modules: false,
+              useBuiltIns: 'usage',
+            }],
+          ],
+          plugins: [
+            ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-function-bind',
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-transform-modules-commonjs',
+          ],
+        },
+      }, {
+        loader: 'ts-loader' ,
+      }]
     }]
   },
   resolve: {
@@ -24,6 +53,11 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'TARGET_ENV': JSON.stringify(process.env.NODE_ENV),
+      },
+    }),
     new CopyWebpackPlugin([{
       from: 'src/static',
     }]),

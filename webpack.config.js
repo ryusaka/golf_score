@@ -6,7 +6,12 @@ const webpack = require('webpack')
 
 module.exports = {
   mode: 'development',
-  entry: './src/app/index.tsx',
+  entry: {
+    bundle: [
+      '@babel/polyfill',
+      './src/app/index.tsx',
+    ],
+  },
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js'
@@ -30,7 +35,32 @@ module.exports = {
   module: {
     rules: [{
       test: /\.tsx?$/,
-      use: 'ts-loader'
+      use: [{
+        loader: "babel-loader",
+        options: {
+          cacheDirectory: true,
+          presets: [
+            '@babel/preset-react',
+            ['@babel/preset-env', {
+              targets: {
+                browsers: ['last 2 versions', '> 1%'],
+              },
+              modules: false,
+              useBuiltIns: 'usage',
+            }],
+          ],
+          plugins: [
+            'react-hot-loader/babel',
+            ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-function-bind',
+            '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-transform-modules-commonjs',
+          ],
+        },
+      }, {
+        loader: 'ts-loader' ,
+      }]
     }]
   },
   resolve: {
