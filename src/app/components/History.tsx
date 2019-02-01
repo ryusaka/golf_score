@@ -63,7 +63,7 @@ export default class History extends React.Component<Props, State> {
               </ExpansionPanel>
             )}
             <div className={classes.footer}>
-              <Button className={classes.toTop} fullWidth color='primary' variant='contained' onClick={() => this.props.history.goBack()}>トップに戻る</Button>
+              <Button className={classes.toTop} fullWidth color='primary' variant='contained' onClick={() => this.props.history.push('/')}>トップに戻る</Button>
             </div>
           </div>
         </div>

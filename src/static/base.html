@@ -47,6 +47,11 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
         navigator.serviceWorker.register("/serviceWorker.js")
+          .then(registration => {
+            registration.onupdatefound = function() {
+              registration.update()
+            }
+          })
       })
     }
   </script>

@@ -14,7 +14,7 @@ module.exports = {
   },
   output: {
     path: `${__dirname}/dist`,
-    filename: 'bundle.js'
+    filename: 'bundle.[hash].js',
   },
   devtool: 'source-map',
   module: {
@@ -59,6 +59,10 @@ module.exports = {
       },
     }),
     new CopyWebpackPlugin([{
+      from: 'src/static',
+      to: '[path]/[name].[hash].[ext]',
+      ignore: ['serviceWorker.js', '**/.DS_Store', 'base.html'],
+    }, {
       from: 'src/static',
     }]),
     new HtmlWebpackPlugin({
