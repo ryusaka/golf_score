@@ -10,7 +10,9 @@ import { get as getStore, set as setStore } from 'lib/storage'
 
 export const history = createBrowserHistory()
 const lastPath = getStore('lastPath')
-history.replace(lastPath)
+if (/\/score/.test(lastPath)) {
+  history.replace(lastPath)
+}
 
 // redux-devtoolの設定
 const composeEnhancers = process.env.TARGET_ENV === 'production' ? compose : (window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] || compose)
