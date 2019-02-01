@@ -7,8 +7,8 @@
     "mongo": "node --experimental-repl-await built/api/repl.js",
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
     "start": "node ./src/api/server.js",
-    "build": "webpack --config webpack.config.js",
-    "heroku-postbuild": "webpack --config webpack.config.js; rm ./dist/*.map"
+    "build": "webpack --config webpack.build.js",
+    "heroku-postbuild": "webpack --config webpack.build.js; rm ./dist/*.map"
   },
   "dependencies": {
     "@material-ui/core": "^3.6.2",
@@ -58,6 +58,7 @@
     "@typescript-eslint/typescript-estree": "^1.1.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^4.6.0",
     "eslint": "^5.12.1",
     "eslint-loader": "^2.1.1",
     "eslint-plugin-react": "^7.12.4",

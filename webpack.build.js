@@ -5,28 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './src/app/index.tsx',
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js'
   },
   devtool: 'source-map',
-  devServer: {
-    contentBase: path.join(__dirname, '/src/static'),
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    stats: 'errors-only',
-    port: 11000,
-    host: '0.0.0.0',
-    // proxy: {
-    //   '**': {
-    //     target: 'http://0.0.0.0:11111',
-    //     changeOrigin: true,
-    //   },
-    // },
-  },
   module: {
     rules: [{
       test: /\.tsx?$/,
@@ -39,6 +24,9 @@ module.exports = {
     plugins: [new TsconfigPathsPlugin()]
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: 'src/static',
+    }]),
     new HtmlWebpackPlugin({
       template: 'src/static/base.html',
     }),
