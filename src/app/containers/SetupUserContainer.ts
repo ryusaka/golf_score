@@ -17,7 +17,7 @@ import { ReduxState } from 'lib/store';
 const styles = (theme: Theme) => createStyles ({
   root: {
     background: theme.palette.grey[200],
-    padding: '60px 0 70px',
+    padding: '60px 0',
     height: '100%',
   },
   main: {
@@ -45,7 +45,7 @@ const styles = (theme: Theme) => createStyles ({
     marginBottom: 10,
   },
   button: {
-    height: 50,
+    height: 40,
   },
 })
 

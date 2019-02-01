@@ -29,6 +29,7 @@ export default class Setup extends React.Component<Props, State> {
 
   render() {
     const { classes } = this.props
+    const { players } = this.state
     return (
       <div className={classes.root}>
         <Header>
@@ -40,7 +41,7 @@ export default class Setup extends React.Component<Props, State> {
           ))}
         </Paper>
         <Paper className={classes.submitButton}>
-          <Button color='primary' className={classes.button} variant='contained' onClick={this.submit}>決定</Button>
+          <Button disabled={!players.some(p => Boolean(p))} color='primary' className={classes.button} variant='contained' onClick={this.submit}>決定</Button>
         </Paper>
       </div>
     )

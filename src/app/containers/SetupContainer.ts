@@ -16,7 +16,7 @@ const styles = (theme: Theme) => createStyles({
   root: {
     height: '100%',
     background: theme.palette.grey[200],
-    padding: '60px 0 70px',
+    padding: '60px 0',
     overflowY: 'scroll',
   },
   main: {
@@ -68,7 +68,7 @@ const styles = (theme: Theme) => createStyles({
     borderRadius: 0,
   },
   button: {
-    height: 50,
+    height: 40,
   },
 })
 

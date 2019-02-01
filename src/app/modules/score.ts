@@ -181,10 +181,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
       const scores = state.scores
       const idx = scores.findIndex(s => s.player === action.player.id)
       scores[idx].scores[action.hole - 1].stroke++
-      return {
+      const store = {
         ...state,
         scores,
       }
+      setStore('score', store)
+      return store
     }
     case ScoreActions.DECREMENT: {
       const scores = state.scores
@@ -192,10 +194,12 @@ const reducer = (state: State = initialState, action: Actions): State => {
       if (scores[idx].scores[action.hole - 1].stroke > 1) {
         scores[idx].scores[action.hole - 1].stroke--
       }
-      return {
+      const store = {
         ...state,
         scores,
       }
+      setStore('score', store)
+      return store
     }
     case ScoreActions.MEDAL_SELECT: {
       const scores = state.scores

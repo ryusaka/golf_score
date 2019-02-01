@@ -15,7 +15,6 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": false,
     "baseUrl": ".",
-    "esModuleInterop": true,
     "paths": {
       "containers/*": [
         "./src/app/containers/*",

@@ -1,5 +1,5 @@
 import { Action, Dispatch } from 'redux'
-import uuid from 'uuid/v4'
+import * as uuid from 'uuid/v4'
 import { IPlayerStore, IPlayer, IScores } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
 import { LoadAllAction as loadAllScoreAction, ScoreActions } from 'modules/score'

@@ -35,12 +35,8 @@ const styles = (theme: Theme) => createStyles({
     marginLeft: 10,
   },
   scoreButtonIcon: {
-    width: 40,
-    height: 40,
-  },
-  scoreButton: {
-    width: 40,
-    height: 40,
+    width: 36,
+    height: 36,
   },
 })
 
