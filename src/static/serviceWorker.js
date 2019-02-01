@@ -1,4 +1,5 @@
 const STATIC_DATA = [
+  '/?pwa=true',
   'index.html',
   'bundle.js',
   'manifest.json',
