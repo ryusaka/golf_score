@@ -1,5 +1,6 @@
 const fallback = require('express-history-api-fallback')
 const path = require('path')
+const compression = require('compression')
 process.on('uncaughtException', err => {
   const message = `API Uncaught Exception: ${err.name || 'Unknown'}\n\n${err.message}\n${err.stack}`
   console.error(message)
@@ -12,7 +13,11 @@ process.on('unhandledRejection', err => {
 
 const express = require('express')
 const app = express()
-const server = app.listen(process.env.PORT, () => {
+app.use(compression({
+  level: 9,
+  memLevel: 9,
+}))
+app.listen(process.env.PORT, () => {
   console.log('Starting server on %s', app.get('port'))
 })
 

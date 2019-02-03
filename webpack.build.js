@@ -1,4 +1,3 @@
-const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin').TsconfigPathsPlugin
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -68,6 +67,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/static/base.html',
     }),
-    new webpack.HotModuleReplacementPlugin(),
   ]
 }
