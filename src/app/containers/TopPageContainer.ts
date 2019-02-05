@@ -7,13 +7,12 @@ import {
   createStyles,
   Theme,
 } from '@material-ui/core'
-import { load as loadField } from 'modules/field'
+import { loadFromHistory } from 'modules/field'
 import { reset as resetScore } from 'modules/score'
-import { reset as resetField } from 'modules/field'
 import { reset as resetPlayer } from 'modules/player'
 
 import { ReduxState } from 'lib/store'
-import { IField } from 'lib/interfaces'
+import { IField, IHole } from 'lib/interfaces'
 
 import TopPage from 'components/TopPage'
 
@@ -24,23 +23,30 @@ const styles = (theme: Theme) => createStyles({
     flexDirection: 'column',
     height: '100%',
     alignItems: 'center',
+    padding: '70px 10px 0',
   },
   paper: {
-    margin: 'auto 20px',
-    padding: '50px 30px',
-  },
-  textField: {
-    background: theme.palette.common.white,
-    marginTop: 30,
-    width: 250,
+    padding: 10,
+    display: 'flex',
+    width: '100%',
+    flexDirection: 'column',
   },
   button: {
     height: 40,
-    marginTop: 20,
+    margin: 5,
   },
   buttonWrap: {
-    width: '100%',
-    padding: '20px 0',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '20px 0',
+  },
+  secondaryButton: {
+    height: 40,
+    margin: '0 5px',
+  },
+  secondaryButtonWrap: {
+    display: 'flex',
+    marginTop: 10,
   },
   title: {
     color: theme.palette.grey[800],
@@ -49,22 +55,21 @@ const styles = (theme: Theme) => createStyles({
 })
 
 export interface State {
-  name: string
+  field: IField
 }
 export interface Props extends WithStyles<typeof styles> {
   history: H.History
-  loadField: (name: string) => void
   resetScore: () => void
   resetField: () => void
   resetPlayer: () => void
+  loadFromHistory: (field: IField) => void
   field: IField
 }
 
 const mapDispatchToProps = {
-  loadField,
   resetScore,
-  resetField,
   resetPlayer,
+  loadFromHistory,
 }
 
 export default compose(

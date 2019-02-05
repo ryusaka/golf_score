@@ -29,6 +29,7 @@ export interface IPlayer {
 export interface IField {
   name: string
   holes: IHole[]
+  id: string
 }
 
 export interface IHole {

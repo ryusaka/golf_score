@@ -8,7 +8,7 @@ import theme from 'lib/theme'
 import { history, store } from 'lib/store'
 import TopPage from 'containers/TopPageContainer'
 import Score from 'containers/ScoreContainer'
-import Setup from 'containers/SetupContainer'
+import SetupField from 'containers/SetupFieldContainer'
 import Result from 'containers/ResultContainer'
 import SetupUser from 'containers/SetupUserContainer'
 import HistoryPage from 'containers/HistoryContainer'
@@ -19,8 +19,9 @@ const App = () => {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            <Route path='/setup' component={Setup} />
+            {/* <Route path='/setup' component={Setup} /> */}
             <Route path='/setup-user' component={SetupUser} />
+            <Route path='/setup-field' component={SetupField} />
             <Route path='/score' component={Score} />
             <Route path='/result' component={Result} />
             <Route path='/histories' component={HistoryPage} />

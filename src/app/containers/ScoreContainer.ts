@@ -6,7 +6,6 @@ import {
   createStyles,
   Theme,
 } from '@material-ui/core'
-import { load as loadField } from 'modules/field'
 import { back, forward, finish, save } from 'modules/score'
 
 import { ReduxState } from 'lib/store'
@@ -57,7 +56,6 @@ export interface Props extends WithStyles<typeof styles> {
   field: IField
   now: number
   players: IPlayer[]
-  loadField: (name: string) => void
   back: () => void
   forward: () => void
   finish: () => void
@@ -65,7 +63,6 @@ export interface Props extends WithStyles<typeof styles> {
 }
 
 const mapDispatchToProps = {
-  loadField,
   back,
   forward,
   finish,

@@ -14,10 +14,6 @@ export default class Score extends React.Component<Props, State> {
     }
   }
 
-  onTextChange = (e) => {
-    this.props.loadField(e.target.value)
-  }
-
   finish = () => {
     this.props.finish()
     this.props.save()

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux'
+import compose from 'recompose/compose'
 import * as H from 'history'
 import {
   withStyles,
@@ -6,11 +7,10 @@ import {
   Theme,
 } from '@material-ui/core'
 import { WithStyles } from '@material-ui/core'
-import { setHole } from 'modules/field'
+import { create } from 'modules/field'
 
-import { ReduxState } from 'lib/store'
-import { IField, IHole } from 'lib/interfaces'
-import Setup from 'components/Setup'
+import { IHole } from 'lib/interfaces'
+import SetupField from 'components/SetupField'
 
 const styles = (theme: Theme) => createStyles({
   root: {
@@ -70,21 +70,27 @@ const styles = (theme: Theme) => createStyles({
   button: {
     height: 40,
   },
+  textField: {
+    background: theme.palette.common.white,
+    margin: 15,
+    display: 'flex',
+  },
 })
 
 export interface State {
+  name: string
   holes: IHole[]
 }
 export interface Props extends WithStyles<typeof styles> {
   history: H.History
-  setHole: (holes: IHole[]) => void
-  field: IField
+  create: (name: string, holes: IHole[]) => void
 }
 
 const mapDispatchToProps = {
-  setHole,
+  create,
 }
 
-export default withStyles(styles)(connect((state: ReduxState) => ({
-  field: state.field,
-}), mapDispatchToProps)(Setup))
+export default compose(
+  withStyles(styles),
+  connect(null, mapDispatchToProps),
+)(SetupField)

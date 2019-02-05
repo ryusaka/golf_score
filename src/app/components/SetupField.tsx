@@ -4,21 +4,22 @@ import {
   IconButton,
   Button,
   Paper,
+  TextField,
 } from '@material-ui/core'
-import { Props, State } from 'containers/SetupContainer'
+import { Props, State } from 'containers/SetupFieldContainer'
 import Header from 'containers/HeaderContainer'
 
-export default class Setup extends React.Component<Props, State> {
+export default class SetupField extends React.Component<Props, State> {
   constructor(props) {
     super(props)
     this.state = {
-      holes: props.holes || [],
+      holes: [...new Array(9)].fill(1).map((_, idx) => ({number: idx + 1, par: 4})),
+      name: '',
     }
   }
 
-  componentDidMount() {
-    const { field: { holes } } = this.props
-    this.setState({holes})
+  onTextChange = (e) => {
+    this.setState({name: e.target.value})
   }
 
   setPar = (par) => (hole) => () => {
@@ -28,22 +29,26 @@ export default class Setup extends React.Component<Props, State> {
   }
 
   submit = () => {
-    this.props.setHole(this.state.holes)
-    this.props.history.push('/setup-user')
+    this.props.create(this.state.name, this.state.holes)
+    this.props.history.push('/')
   }
 
   render() {
-    const { classes, field } = this.props
-    const { holes } = this.state
+    const { classes } = this.props
+    const { holes, name } = this.state
 
     return (
       <div className={classes.root}>
         <Header>
-          <div className={classes.header}>
-            <h1 style={{fontSize: 24, textAlign: 'center'}}>コース情報入力</h1>
-            <h3 style={{textAlign: 'center'}}>{field.name}</h3>
-          </div>
+          <h1 style={{fontSize: 24, textAlign: 'center'}}>コース情報入力</h1>
         </Header>
+        <TextField
+          label='コース名'
+          className={classes.textField}
+          variant='outlined'
+          value={this.state.name}
+          onChange={this.onTextChange}
+        />
         <Paper className={classes.main}>
           <div className={classes.hole}>
             <div className={classes.holeNumber}>ホール</div>
@@ -61,7 +66,7 @@ export default class Setup extends React.Component<Props, State> {
           )}
         </Paper>
         <Paper className={classes.submitButton}>
-          <Button className={classes.button} color='primary' variant='contained' onClick={this.submit}>次へ</Button>
+          <Button disabled={!name || holes.length !== 9} className={classes.button} color='primary' variant='contained' onClick={this.submit}>登録</Button>
         </Paper>
       </div>
     )

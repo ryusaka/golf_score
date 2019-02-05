@@ -1,51 +1,43 @@
 import { Action, Dispatch } from 'redux'
+import * as uuid from 'uuid/v4'
 import { IFieldStore, IHole } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
 export type State = IFieldStore
 
 export enum FieldActions {
-  LOAD = 'field/load',
-  SET_HOLE = 'field/setHole',
-  RESET = 'field/reset',
+  CREATE = 'field/create',
+  LOAD_FROM_LIST = 'field/loadFromList',
 }
 
-interface LoadAction extends Action {
-  type: FieldActions.LOAD
+interface CreateAction extends Action {
+  type: FieldActions.CREATE
   name: string
-}
-
-export const load = (name: string) => {
-  return (dispatch: Dispatch) => {
-    dispatch<LoadAction>({type: FieldActions.LOAD, name})
-  }
-}
-
-interface SetHoleAction extends Action {
-  type: FieldActions.SET_HOLE
   holes: IHole[]
 }
 
-export const setHole = (holes: IHole[]) => {
+export const create = (name: string, holes) => {
   return (dispatch: Dispatch) => {
-    dispatch<SetHoleAction>({type: FieldActions.SET_HOLE, holes})
+    dispatch<CreateAction>({type: FieldActions.CREATE, name, holes})
   }
 }
 
-interface ResetAction extends Action {
-  type: FieldActions.RESET
+interface LoadFromListAction extends Action {
+  type: FieldActions.LOAD_FROM_LIST
+  field: IFieldStore
 }
-export const reset = () => {
+export const loadFromHistory = (field: IFieldStore) => {
   return (dispatch: Dispatch) => {
-    dispatch<ResetAction>({type: FieldActions.RESET})
+    dispatch<LoadFromListAction>({type: FieldActions.LOAD_FROM_LIST, field})
   }
 }
 
-export type Actions = LoadAction | SetHoleAction | ResetAction
+export type Actions = CreateAction  | LoadFromListAction
 
 const init = () => {
   return {
     name: '',
     holes: [...new Array(9)].fill(1).map((_, idx) => ({number: idx + 1, par: 4})),
+    id: 'initial',
   }
 }
 
@@ -53,24 +45,18 @@ const initialState = getStore('field') || init()
 
 const reducer = (state: State = initialState, action: Actions): IFieldStore => {
   switch (action.type) {
-    case FieldActions.LOAD: {
-      const store = {
-        ...state,
+    case FieldActions.CREATE: {
+      const field = {
         name: action.name,
-      }
-      setStore('field', store)
-      return store
-    }
-    case FieldActions.SET_HOLE: {
-      const store =  {
-        ...state,
         holes: action.holes,
       }
-      setStore('field', store)
-      return store
+      const fields = getStore('fields') || []
+      fields.push(Object.assign({id: uuid()}, field))
+      setStore('fields', fields)
+      return state
     }
-    case FieldActions.RESET: {
-      const store = init()
+    case FieldActions.LOAD_FROM_LIST: {
+      const store = action.field
       setStore('field', store)
       return store
     }
