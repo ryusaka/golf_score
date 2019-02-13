@@ -36,7 +36,7 @@ export default class History extends React.Component<Props, State> {
     return (
       <>
         <div className={classes.root}>
-          <Header><h2 style={{fontSize: 24}}>スコア履歴</h2></Header>
+          <Header><h1 style={{fontSize: 24}}>スコア履歴</h1></Header>
           <div className={classes.main}>
             {logs.map((h, idx) =>
               <ExpansionPanel key={moment(h.date).toString()} className={classes.expansion}>
