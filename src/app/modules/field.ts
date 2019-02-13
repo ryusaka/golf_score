@@ -4,7 +4,7 @@ import { IFieldStore, IHole } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
 export type State = IFieldStore
 
-export enum FieldActions {
+export const enum FieldActions {
   CREATE = 'field/create',
   LOAD_FROM_LIST = 'field/loadFromList',
 }

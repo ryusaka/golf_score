@@ -4,7 +4,7 @@ import { set as setStore, get as getStore } from 'lib/storage'
 import { ReduxState, store } from 'lib/store'
 export type State = IScoreStore
 
-export enum ScoreActions {
+export const enum ScoreActions {
   LOAD = 'score/load',
   LOAD_ALL = 'score/loadAll',
   FORWARD = 'score/forward',

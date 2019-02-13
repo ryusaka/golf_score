@@ -5,7 +5,7 @@ import { set as setStore, get as getStore } from 'lib/storage'
 import { LoadAllAction as loadAllScoreAction, ScoreActions } from 'modules/score'
 export type State = IPlayerStore
 
-export enum PlayerActions {
+export const enum PlayerActions {
   SET_PLAYER = 'player/setPlayer',
   RESET = 'player/reset',
 }
