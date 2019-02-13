@@ -31,7 +31,8 @@
     },
   },
   "include": [
-    "src/app/**/*"
+    "src/app/**/*",
+    "src/api/**/*",
   ],
   "exclude": [
     "node_modules",

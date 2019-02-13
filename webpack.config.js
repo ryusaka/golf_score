@@ -9,12 +9,14 @@ module.exports = {
   entry: {
     bundle: [
       '@babel/polyfill',
-      './src/app/index.tsx',
+      `${__dirname}/src/app/index.tsx`,
     ],
   },
   output: {
     path: `${__dirname}/dist`,
-    filename: 'bundle.[hash].js'
+    filename: 'bundle.[hash].js',
+    publicPath: '/',
+
   },
   devtool: 'source-map',
   devServer: {

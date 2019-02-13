@@ -6,6 +6,6 @@ module.exports = {
       useNewUrlParser: true,
     },
   },
-  webOrigin: 'http://localhost:11000',
+  webOrigin: 'https://golfix.herokuapp.com',
   static: 'dist',
 }

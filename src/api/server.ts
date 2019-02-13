@@ -1,6 +1,6 @@
-import fallback from 'express-history-api-fallback'
+import * as fallback from 'express-history-api-fallback'
 import * as path from 'path'
-import compression from 'compression'
+import * as compression from 'compression'
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
 
