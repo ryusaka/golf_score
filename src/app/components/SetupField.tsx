@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@material-ui/core'
 import { Props, State } from 'containers/SetupFieldContainer'
+import * as qs from 'qs'
 import Header from 'containers/HeaderContainer'
 
 export default class SetupField extends React.Component<Props, State> {
@@ -15,6 +16,16 @@ export default class SetupField extends React.Component<Props, State> {
     this.state = {
       holes: [...new Array(9)].fill(1).map((_, idx) => ({number: idx + 1, par: 4})),
       name: '',
+    }
+  }
+
+  componentDidMount() {
+    const search = qs.parse(this.props.location.search)
+    if (search.field) {
+      this.setState({
+        holes: search.field.holes.map(h => ({par: Number(h.par), number: Number(h.number)})),
+        name: search.field.name,
+      })
     }
   }
 

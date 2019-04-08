@@ -9,7 +9,7 @@ import {
 import { WithStyles } from '@material-ui/core'
 import { create } from 'modules/field'
 
-import { IHole } from 'lib/interfaces'
+import { IHole, IField } from 'lib/interfaces'
 import SetupField from 'components/SetupField'
 
 const styles = (theme: Theme) => createStyles({
@@ -83,6 +83,7 @@ export interface State {
 }
 export interface Props extends WithStyles<typeof styles> {
   history: H.History
+  location: H.Location
   create: (name: string, holes: IHole[]) => void
 }
 

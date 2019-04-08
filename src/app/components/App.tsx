@@ -12,6 +12,7 @@ import SetupField from 'containers/SetupFieldContainer'
 import Result from 'containers/ResultContainer'
 import SetupUser from 'containers/SetupUserContainer'
 import HistoryPage from 'containers/HistoryContainer'
+import FieldTop from 'containers/FieldTopContainer'
 
 const App = () => {
   return (
@@ -19,12 +20,12 @@ const App = () => {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <Switch>
-            {/* <Route path='/setup' component={Setup} /> */}
-            <Route path='/setup-user' component={SetupUser} />
-            <Route path='/setup-field' component={SetupField} />
-            <Route path='/score' component={Score} />
-            <Route path='/result' component={Result} />
-            <Route path='/histories' component={HistoryPage} />
+            <Route exact path='/setup-user' component={SetupUser} />
+            <Route exact path='/fields/new' component={SetupField} />
+            <Route exact path='/fields' component={FieldTop} />
+            <Route exact path='/score' component={Score} />
+            <Route exact path='/result' component={Result} />
+            <Route exact path='/histories' component={HistoryPage} />
             <Route path='/' component={TopPage} />
           </Switch>
         </ConnectedRouter>
