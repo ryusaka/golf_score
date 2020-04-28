@@ -1,6 +1,7 @@
 import * as React from 'react'
+import clsx from 'clsx'
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar, Button } from '@material-ui/core'
-import classname from 'lib/classname'
+
 import { Props } from 'containers/ScoreResultContainer'
 
 const Result: React.FunctionComponent<Props> = (props) => {
@@ -9,7 +10,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
     if (medal === 'D') return classes.diamond
     if (medal === '金') return classes.gold
     if (medal === '銀') return classes.silver
-    if (medal === '銅') return classes.blonze
+    if (medal === '銅') return classes.bronze
     if (medal === '鉄') return classes.iron
     return null
   }
@@ -38,7 +39,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
               <TableCell className={classes.name} component='th' scope='row'>
                 {players.find(p => p.id === score.player).name}
               </TableCell>
-              {score.scores.map((s, i) => <TableCell key={i} className={classes.score} align='right'>{s.medal ? <Avatar className={classname(getClass(s.medal), classes.medal)}>{s.stroke}</Avatar> : s.stroke}</TableCell>)}
+              {score.scores.map((s, i) => <TableCell key={i} className={classes.score} align='right'>{s.medal ? <Avatar className={clsx(getClass(s.medal), classes.medal)}>{s.stroke}</Avatar> : s.stroke}</TableCell>)}
               <TableCell className={classes.total}>{score.scores.reduce((prev, curr) => prev + curr.stroke, 0)}</TableCell>
             </TableRow>
           ))}

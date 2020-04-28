@@ -61,7 +61,7 @@ export const styles = (theme: Theme) => createStyles({
   silver: {
     background: '#C0C0C0',
   },
-  blonze: {
+  bronze: {
     background: '#8C4841',
   },
   iron: {

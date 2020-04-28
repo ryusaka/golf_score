@@ -1,6 +1,7 @@
 import * as React from 'react'
+import clsx from 'clsx'
 import { Avatar } from '@material-ui/core'
-import classname from 'lib/classname'
+
 import { State, Props } from 'containers/MedalSelectContainer'
 
 export default class Score extends React.Component<Props, State> {
@@ -14,7 +15,7 @@ export default class Score extends React.Component<Props, State> {
     if (medal === 'D') return this.props.classes.diamond
     if (medal === '金') return this.props.classes.gold
     if (medal === '銀') return this.props.classes.silver
-    if (medal === '銅') return this.props.classes.blonze
+    if (medal === '銅') return this.props.classes.bronze
     if (medal === '鉄') return this.props.classes.iron
     return null
   }
@@ -27,7 +28,7 @@ export default class Score extends React.Component<Props, State> {
           <Avatar
             key={medal}
             onClick={() => medalSelect(medal, player, hole)}
-            className={classname(classes.medal, medal === score.scores[hole - 1].medal && this.getClassName(medal))}
+            className={clsx(classes.medal, medal === score.scores[hole - 1].medal && this.getClassName(medal))}
           >
             {medal}
           </Avatar>

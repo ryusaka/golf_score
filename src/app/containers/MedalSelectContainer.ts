@@ -43,7 +43,7 @@ const styles = (theme: Theme) => createStyles({
     background: '#C0C0C0',
     color: theme.palette.common.white,
   },
-  blonze: {
+  bronze: {
     background: '#8C4841',
     color: theme.palette.common.white,
   },

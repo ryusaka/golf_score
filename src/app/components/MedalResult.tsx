@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Props } from 'containers/MedalResultContainer'
+import clsx from 'clsx'
 import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar } from '@material-ui/core'
-import classname from 'lib/classname'
+
+import { Props } from 'containers/MedalResultContainer'
 
 const Result: React.FunctionComponent<Props> = (props) => {
   const { scores, players, elevation = 1, classes } = props
@@ -9,7 +10,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
     if (medal === 'D') return classes.diamond
     if (medal === '金') return classes.gold
     if (medal === '銀') return classes.silver
-    if (medal === '銅') return classes.blonze
+    if (medal === '銅') return classes.bronze
     if (medal === '鉄') return classes.iron
     return null
   }
@@ -35,7 +36,7 @@ const Result: React.FunctionComponent<Props> = (props) => {
           <TableHead>
             <TableRow>
               <TableCell className={classes.name} />
-              {['D', '金', '銀', '銅', '鉄'].map(medal => <TableCell key={medal} className={classes.score}><Avatar className={classname(getClass(medal), classes.medal)}>{medal}</Avatar></TableCell>)}
+              {['D', '金', '銀', '銅', '鉄'].map(medal => <TableCell key={medal} className={classes.score}><Avatar className={clsx(getClass(medal), classes.medal)}>{medal}</Avatar></TableCell>)}
               <TableCell className={classes.total}>計</TableCell>
             </TableRow>
           </TableHead>
