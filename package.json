@@ -5,8 +5,8 @@
     "dev:api": "nodemon --config ./nodemon.json",
     "mongo": "node --experimental-repl-await dist/node/src/api/repl.js",
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
-    "start": "node ./src/api/server.js",
-    "build": "rm -rf ./dist; webpack --config webpack.build.js",
+    "start": "node ./dist/node/src/api/server.js",
+    "build": "next build src/app",
     "heroku-postbuild": "rm -rf ./dist; webpack --config webpack.build.js; rm ./dist/*.map"
   },
   "dependencies": {

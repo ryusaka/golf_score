@@ -63,7 +63,7 @@ const partialAuth = passport.authenticate(['bearer', 'anonymous'], { session: fa
 server.use(expressLogger)
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(bodyParser.json({ limit: '1mb' }))
-server.use(express.static(config.get('static')))
+server.use(express.static(require('path').resolve(__dirname, config.get('static'))))
 
 const wrap = (handler: Function) => {
   return async (req, res, next) => {
