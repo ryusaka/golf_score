@@ -1,7 +1,6 @@
 import * as React from 'react'
 import moment from 'moment'
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   makeStyles,

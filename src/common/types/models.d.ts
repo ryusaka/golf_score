@@ -69,6 +69,7 @@ export namespace Round {
       mine: Score[]
       others: OtherScore[]
     }
+    finished: boolean
   }
 }
 

@@ -48,6 +48,7 @@ const Setup: React.FC<Props> = (props) => {
 
   const afterCreateNewCourse = async () => {
     setAddCourse(false)
+    await dispatch(loadFields())
     await dispatch(loadCourses())
   }
 

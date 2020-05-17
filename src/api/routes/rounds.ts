@@ -10,6 +10,13 @@ const index = async (req, res) => {
   res.json({ rounds })
 }
 
+const playing = async (req, res) => {
+  const playingRound = await Round.findOne({ user: req.user._id, finished: false }).select('_id').lean()
+  if (!playingRound) return res.json({ playing: null })
+
+  return res.json({ playing: playingRound._id })
+}
+
 const show = async (req, res) => {
   const round = await roundLib.get(req.params.id)
   if (!round) return res.status(404).json({ message: 'not found' })
@@ -41,9 +48,10 @@ const update = async (req, res) => {
   if (!exists) return res.status(404).json({ message: 'not found' })
   const $set: any = {}
   if (req.body.score) $set.score = req.body.score
+  if (req.body.finished) $set.finished = req.body.finished
   await Round.updateOne({ _id: req.params.id }, { $set })
 
   return show(req, res)
 }
 
-export { index, show, create, update }
+export { index, show, create, update, playing }

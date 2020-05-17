@@ -9,8 +9,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  DialogActions,
-  Button,
   makeStyles,
   Collapse,
   useMediaQuery,
@@ -105,9 +103,6 @@ export const NewCourseFormDialog: React.FC<DProps> = (props) => {
       <DialogContent className={classes.dialogContent}>
         <NewCourseForm {...rest} />
       </DialogContent>
-      <DialogActions className={classes.dialogActions}>
-        <Button className={classes.addButton}>追加</Button>
-      </DialogActions>
     </Dialog>
   )
 }

@@ -13,6 +13,7 @@ import { load as loadUser } from 'modules/auth'
 import { IField } from 'lib/interfaces'
 import { RootState } from 'modules/reducer'
 import Link from 'next/link'
+import { client } from 'lib/axiosClient'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +57,11 @@ const TopPage: React.FC<Props> = (props) => {
 
   React.useEffect(() => {
     dispatch(loadUser())
+    client.get('/api/rounds/playing').then((res) => {
+      if (res.data.playing) {
+        router.push(`/rounds/${res.data.playing}?h=1`)
+      }
+    })
     router.prefetch('/rounds/new')
   }, [])
 

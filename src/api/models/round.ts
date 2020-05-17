@@ -27,6 +27,7 @@ const schema = new Schema(
     date: { type: Date, required: true },
     score: { type: scoreSchema, required: true },
     user: { type: Schema.Types.ObjectId, ref: 'User' },
+    finished: { type: Schema.Types.Boolean, default: false },
   },
   {
     timestamps: true,

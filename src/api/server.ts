@@ -102,6 +102,7 @@ apiRouter
   .get('/courses/:id', wrap(courses.show))
   .get('/rounds', authenticate, wrap(rounds.index))
   .post('/rounds', authenticate, wrap(rounds.create))
+  .get('/rounds/playing', authenticate, wrap(rounds.playing))
   .get('/rounds/:id', authenticate, wrap(rounds.show))
   .put('/rounds/:id', authenticate, wrap(rounds.update))
 

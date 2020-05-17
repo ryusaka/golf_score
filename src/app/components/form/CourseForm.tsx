@@ -77,7 +77,7 @@ const CourseForm: React.FC<CourseFormProps> = (props) => {
   const { onSubmit, course } = props
   return (
     <Form onSubmit={onSubmit} mutators={{ ...arrayMutators }} initialValues={{ holes: initialHoles(course) }}>
-      {({ handleSubmit, values }) => (
+      {({ handleSubmit, values, submitting }) => (
         <form className={classes.root} onSubmit={handleSubmit}>
           <div className={classes.formBody}>
             <Typography variant='h6'>コース名</Typography>
@@ -115,7 +115,14 @@ const CourseForm: React.FC<CourseFormProps> = (props) => {
             </Paper>
           </div>
           <div className={classes.formAction}>
-            <Button fullWidth className={classes.button} color='primary' variant='contained' type='submit'>
+            <Button
+              disabled={submitting}
+              fullWidth
+              className={classes.button}
+              color='primary'
+              variant='contained'
+              type='submit'
+            >
               作成
             </Button>
           </div>
