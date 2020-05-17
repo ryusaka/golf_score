@@ -1,9 +1,6 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import { Form, Field } from 'react-final-form'
 import { Button, Paper, makeStyles, List, Collapse, ListItem, ListItemText, Typography } from '@material-ui/core'
-import arrayMutators from 'final-form-arrays'
-import { FieldArrayRenderProps, FieldArray } from 'react-final-form-arrays'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 
@@ -11,12 +8,16 @@ import { loadAll as loadFields } from 'modules/field'
 import { loadAll as loadCourses } from 'modules/course'
 import { create as createRound } from 'modules/round'
 import { RootState, useAppDispatch } from 'modules/reducer'
-import HoleInput from 'components/form/HoleInput'
 import HeaderContainer from 'components/HeaderContainer'
 
 import type { Field as FieldType, Course as CourseType } from 'common/types/models'
 import { NewCourseFormDialog } from 'components/NewCourse'
 import { useRouter } from 'next/router'
+
+type Props = {
+  onSubmit: (values: any) => any
+  field: any
+}
 
 const useRootStyles = makeStyles(() => ({
   root: {
@@ -24,62 +25,6 @@ const useRootStyles = makeStyles(() => ({
   },
   subtitle: {
     marginTop: 16,
-  },
-}))
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: '100%',
-    background: theme.palette.common.white,
-    padding: '60px 0',
-    overflowY: 'scroll',
-  },
-  main: {
-    overflowY: 'scroll',
-    padding: '15px 0',
-    margin: 10,
-  },
-  header: {
-    padding: 10,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  avatars: {
-    display: 'flex',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  selected: {
-    background: theme.palette.primary.main,
-  },
-  hole: {
-    width: '100%',
-    padding: '5px 20px',
-    display: 'flex',
-    alignItems: 'center',
-    '&:nth-child(even)': {
-      background: theme.palette.grey[200],
-    },
-  },
-  holeNumber: {
-    width: 50,
-    marginRight: 20,
-    justifyContent: 'center',
-    display: 'flex',
-  },
-  submitButton: {
-    position: 'fixed',
-    left: 0,
-    bottom: 0,
-    right: 0,
-    padding: 10,
-    display: 'flex',
-    flexDirection: 'column',
-    background: theme.palette.common.white,
-    borderRadius: 0,
-  },
-  button: {
-    height: 40,
   },
 }))
 
@@ -130,7 +75,9 @@ const Setup: React.FC<Props> = (props) => {
       <Typography className={classes.subtitle} variant='subtitle1'>
         一覧にない時
       </Typography>
-      <Button variant='outlined' color='secondary' onClick={() => setAddCourse(true)}>コースを追加する</Button>
+      <Button variant='outlined' color='secondary' onClick={() => setAddCourse(true)}>
+        コースを追加する
+      </Button>
       <NewCourseFormDialog
         afterSubmit={afterCreateNewCourse}
         responsive
@@ -201,49 +148,5 @@ const CourseSelect: React.FC<CourseChoiceProps> = (props) => {
         })}
       </List>
     </div>
-  )
-}
-
-const Holes: React.FC<FieldArrayRenderProps<any, any>> = (props) => {
-  const { fields } = props
-  const classes = useStyles(props)
-  return (
-    <>
-      {fields.map((name, idx) => (
-        <div key={name} className={classes.hole}>
-          <div className={classes.holeNumber}>{fields.value[idx].number}</div>
-          <Field name='par' component={HoleInput} />
-        </div>
-      ))}
-    </>
-  )
-}
-
-type Props = {
-  onSubmit: (values: any) => any
-  field: any
-}
-const NewRound: React.FC<Props> = (props) => {
-  const classes = useStyles(props)
-  const { onSubmit, field } = props
-  return (
-    <Form onSubmit={onSubmit} mutators={{ ...arrayMutators }} initialValues={{ holes: field?.holes }}>
-      {({ handleSubmit }) => (
-        <form onSubmit={handleSubmit} className={classes.root}>
-          <Paper className={classes.main}>
-            <div className={classes.hole}>
-              <div className={classes.holeNumber}>ホール</div>
-              <div className={classes.avatars}>PAR</div>
-            </div>
-            <FieldArray name='holes' component={Holes} />
-          </Paper>
-          <Paper className={classes.submitButton}>
-            <Button className={classes.button} color='primary' variant='contained' type='submit'>
-              次へ
-            </Button>
-          </Paper>
-        </form>
-      )}
-    </Form>
   )
 }

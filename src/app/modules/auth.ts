@@ -30,7 +30,7 @@ export const createUserAction = (user: User.Model): UserAction => ({
   user,
 })
 export const setUser = (user): ThunkAction<void, RootState, typeof axiosClient, UserAction> => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     dispatch(createUserAction(user))
   }
 }

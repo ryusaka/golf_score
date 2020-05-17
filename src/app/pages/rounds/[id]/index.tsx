@@ -55,10 +55,10 @@ const Round: React.FC<Prop> = () => {
             HOLE: <span style={{ fontSize: 24, marginRight: 10 }}>{currentHole}</span> PAR:{' '}
             <span style={{ fontSize: 24 }}>{round.course.holes[currentHole - 1].par}</span>
           </div>
-          <div style={{display: 'flex'}}>
+          <div style={{ display: 'flex' }}>
             {Object.entries(round.course.holes[currentHole - 1].distance).map((v) => (
               <div key={v[0]} style={{ fontSize: 16, display: 'flex', alignItems: 'center' }}>
-                <TeeIcon type={v[0]} style={{marginRight: 8}} />
+                <TeeIcon type={v[0]} style={{ marginRight: 8 }} />
                 {v[1]}yds
               </div>
             ))}

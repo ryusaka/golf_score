@@ -30,7 +30,7 @@ const HeaderContainer: React.FC<Props> = (props) => {
   return (
     <div className={classes.root}>
       <Header classes={headerClasses}>{header}</Header>
-      <div style={{height: 48}}></div>
+      <div style={{ height: 48 }} />
       <div className={clsx(classes.content, className)}>{children}</div>
     </div>
   )

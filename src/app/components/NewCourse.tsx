@@ -61,7 +61,9 @@ const NewCourseForm: React.FC<Props> = (props) => {
         </Paper>
       </Collapse>
       <Collapse in={field}>
-        <Typography onClick={() => setField(null)} variant='subtitle2'>{field?.name}</Typography>
+        <Typography onClick={() => setField(null)} variant='subtitle2'>
+          {field?.name}
+        </Typography>
         <CourseForm onSubmit={submit} />
       </Collapse>
     </>
@@ -74,7 +76,7 @@ type DProps = Props & {
   dialogClasses?: ReturnType<typeof useDStyles>
   responsive?: boolean
 }
-const useDStyles = makeStyles((theme) => ({
+const useDStyles = makeStyles(() => ({
   dialog: {},
   dialogTitle: {},
   dialogContent: {},

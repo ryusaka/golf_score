@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import compose from 'recompose/compose'
-import { withStyles, WithStyles, createStyles, Theme } from '@material-ui/core'
+import { withStyles, WithStyles, createStyles } from '@material-ui/core'
 
 import { ReduxState } from 'lib/store'
 import ScoreInput from 'components/ScoreInput'
 import { IPlayer, IScores } from 'lib/interfaces'
 import { increment, decrement } from 'modules/score'
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     main: {
       display: 'flex',

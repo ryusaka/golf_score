@@ -1,6 +1,6 @@
 import * as React from 'react'
 import clsx from 'clsx'
-import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar, Button } from '@material-ui/core'
+import { Table, TableHead, TableRow, TableCell, TableBody, Paper, Avatar } from '@material-ui/core'
 
 import { Props } from 'containers/ScoreResultContainer'
 

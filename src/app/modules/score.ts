@@ -151,7 +151,7 @@ export type Actions =
 const init = (players) => {
   const scores: IScores[] = players.map((p) => ({
     player: p.id,
-    scores: new Array(9).fill(0).map((s) => ({ stroke: 1 })),
+    scores: new Array(9).fill(0).map(() => ({ stroke: 1 })),
   }))
   return {
     scores,

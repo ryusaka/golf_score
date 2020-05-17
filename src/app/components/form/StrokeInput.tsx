@@ -49,7 +49,7 @@ type Props = {
 
 type FFProps = FieldRenderProps<any> & Props
 
-export const StrokeInputFF: React.FC<FFProps> = props => {
+export const StrokeInputFF: React.FC<FFProps> = (props) => {
   const { input, color, size, variant, allowZero } = props
   return (
     <StrokeInput
@@ -73,7 +73,12 @@ const StrokeInput: React.FC<Props> = (props) => {
 
   return (
     <div className={clsx(classes.root, size === 'small' && classes.small)}>
-      <IconButton disabled={stroke <= (allowZero ? 0 : 1)} onClick={() => props.decrement()} color={color} className={classes.button}>
+      <IconButton
+        disabled={stroke <= (allowZero ? 0 : 1)}
+        onClick={() => props.decrement()}
+        color={color}
+        className={classes.button}
+      >
         <Minus className={clsx(classes.scoreButtonIcon, size === 'small' && classes.iconSmall)} />
       </IconButton>
       <div className={clsx(classes.score, size === 'small' && classes.scoreSmall)}>{stroke}</div>
