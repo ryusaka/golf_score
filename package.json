@@ -6,7 +6,7 @@
     "mongo": "node --experimental-repl-await dist/node/src/api/repl.js",
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
     "start": "node ./dist/node/src/api/server.js",
-    "build": "run-p build:*",
+    "build": "run-s build:tsc build:next start",
     "build:tsc": "tsc -p ./src/api/tsconfig.json",
     "build:next": "next build src/app",
     "heroku-postbuild": "rm -rf ./dist; webpack --config webpack.build.js; rm ./dist/*.map"
