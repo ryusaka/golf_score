@@ -9,7 +9,7 @@
     "build": "run-s build:tsc build:next start",
     "build:tsc": "tsc -p ./src/api/tsconfig.json",
     "build:next": "next build src/app",
-    "heroku-postbuild": "rm -rf ./dist; webpack --config webpack.build.js; rm ./dist/*.map"
+    "heroku-postbuild": "run-s build:tsc build:next start"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.12",
