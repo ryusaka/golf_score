@@ -53,6 +53,7 @@ export namespace Round {
     put?: number
     medal?: Medal
     number?: number
+    _id?: any
   }
   type OtherScore = Partial<Pick<MongoDefault, '_id'>> & {
     name: string

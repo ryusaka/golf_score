@@ -19,7 +19,6 @@ client.interceptors.request.use(
       // 認証トークン
       req.headers.Authorization = `Bearer ${token}`
     }
-    console.log(document?.cookie)
     return req
   },
   (err) => Promise.reject(err)

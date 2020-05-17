@@ -18,14 +18,20 @@ const useStyles = makeStyles((theme) => ({
 
 export type Props = {
   classes?: ReturnType<typeof useStyles>
+  start?: React.ReactNode
+  end?: React.ReactNode
 }
 const Header: React.FC<Props> = (props) => {
-  const { children } = props
+  const { children, start, end } = props
   const classes = useStyles(props)
 
   return (
     <AppBar position='relative' className={classes.appBar} elevation={1}>
-      <Toolbar className={classes.toolbar}>{children}</Toolbar>
+      <Toolbar className={classes.toolbar}>
+        {start}
+        {children}
+        {end}
+      </Toolbar>
     </AppBar>
   )
 }

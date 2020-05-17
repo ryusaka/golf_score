@@ -12,6 +12,7 @@ import { load as loadUser } from 'modules/auth'
 
 import { IField } from 'lib/interfaces'
 import { RootState } from 'modules/reducer'
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,24 +69,16 @@ const TopPage: React.FC<Props> = (props) => {
           <>
             <h2 className={classes.title}>{user.name || user.userId}さん</h2>
             <div className={classes.buttonWrap}>
-              <Button
-                onClick={() => router.push('/rounds/new')}
-                className={classes.button}
-                fullWidth
-                variant='contained'
-                color='primary'
-              >
-                開始
-              </Button>
-              <Button
-                onClick={() => router.push('/histories')}
-                className={classes.button}
-                fullWidth
-                variant='outlined'
-                color='secondary'
-              >
-                履歴を見る
-              </Button>
+              <Link href='/rounds/new'>
+                <Button className={classes.button} fullWidth variant='contained' color='primary'>
+                  開始
+                </Button>
+              </Link>
+              <Link href='/histories'>
+                <Button component='a' className={classes.button} fullWidth variant='outlined' color='secondary'>
+                  履歴を見る
+                </Button>
+              </Link>
             </div>
           </>
         ) : (

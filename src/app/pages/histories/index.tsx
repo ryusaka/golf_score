@@ -1,5 +1,8 @@
 import * as React from 'react'
 import moment from 'moment'
+import { useRouter } from 'next/router'
+import { GetServerSideProps } from 'next'
+import { useSelector, useDispatch } from 'react-redux'
 import {
   makeStyles,
   ExpansionPanel,
@@ -15,11 +18,13 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import HeaderContainer from 'components/HeaderContainer'
+import RoundResult from 'components/RoundResult'
+import MedalTable from 'components/MedalTable'
+
 import { loadAll as loadAllHistory } from 'modules/round'
-import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
-import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from 'modules/reducer'
+
+import type { Course as CourseType } from 'common/types/models'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -85,7 +90,7 @@ const HistoryPage = (props) => {
 
   return (
     <>
-      <HeaderContainer className={classes.root} header={<h2 style={{ fontSize: 24 }}>スコア履歴</h2>}>
+      <HeaderContainer className={classes.root} header={<h2 style={{ fontSize: 24 }}>ラウンド履歴</h2>}>
         <div className={classes.main}>
           {rounds.map((r, idx) => (
             <ExpansionPanel key={moment(r.date).toString()} className={classes.expansion}>
@@ -98,11 +103,11 @@ const HistoryPage = (props) => {
               <ExpansionPanelDetails className={classes.details}>
                 <h3>スコア</h3>
                 <div className={classes.border}>
-                  {/* <ScoreResult scores={r.score} players={h.player.players} field={h.field} elevation={0} /> */}
+                  <RoundResult round={r} course={r.course as CourseType.Model} />
                 </div>
                 <h3>オリンピック</h3>
                 <div className={classes.border}>
-                  {/* <MedalResult scores={h.score.scores} players={h.player.players} field={h.field} elevation={0} /> */}
+                  <MedalTable score={r.score} />
                 </div>
               </ExpansionPanelDetails>
               <Divider />
@@ -144,11 +149,6 @@ const HistoryPage = (props) => {
       </Dialog>
     </>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  console.log(ctx.req)
-  return { props: { history: [] } }
 }
 
 export default HistoryPage

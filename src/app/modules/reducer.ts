@@ -4,7 +4,6 @@ import { thunkWithClient } from 'lib/axiosClient'
 import score from 'modules/score'
 import field from 'modules/field'
 import course from 'modules/course'
-import player from 'modules/player'
 import auth from 'modules/auth'
 import round from 'modules/round'
 import { useDispatch } from 'react-redux'
@@ -15,7 +14,6 @@ export const reducer = combineReducers({
   score,
   field,
   course,
-  player,
   round,
 })
 

@@ -10,8 +10,7 @@ import { StrokeInputFF } from './form/StrokeInput'
 import { Field, Form } from 'react-final-form'
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays'
 import arrayMutators from 'final-form-arrays'
-import { useRouter } from 'next/router'
-import { MedalInputFF } from './form/MedalInput'
+import { MedalInputFF } from 'components/form/MedalInput'
 
 import type { Course as CourseType, Round as RoundType, Medal } from 'common/types/models'
 
@@ -91,7 +90,6 @@ export type Fields = {
 
 const Round: React.FC<Props> = (props) => {
   const classes = useStyles(props)
-  const router = useRouter()
   const [scores, setScores] = React.useState<Fields['scores']>([])
 
   const { course, round, currentHole, onSubmit } = props
@@ -101,14 +99,11 @@ const Round: React.FC<Props> = (props) => {
   }, [currentHole])
 
   const submit = (values: Fields) => {
-    onSubmit({
+    return onSubmit({
       nextIndex: values.nextIndex,
       finish: values.finish,
       score: updateScore(round.score, values, currentHole - 1),
     })
-    if (values.finish) {
-      router.push('/result')
-    }
   }
 
   if (!round || !course) return null

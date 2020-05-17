@@ -85,7 +85,15 @@ const Setup: React.FC<Props> = (props) => {
         open={addCourse}
         onClose={() => setAddCourse(false)}
       />
-      <Button fullWidth onClick={submit} variant='contained' color='primary'>
+      <Button
+        disabled={!selected}
+        style={{ height: 48, fontWeight: 'bold', marginTop: 16 }}
+        size='large'
+        fullWidth
+        onClick={submit}
+        variant='contained'
+        color='primary'
+      >
         開始する
       </Button>
     </HeaderContainer>

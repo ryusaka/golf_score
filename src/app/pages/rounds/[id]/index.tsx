@@ -26,7 +26,7 @@ const Round: React.FC<Prop> = () => {
   const submit: FormProps['onSubmit'] = async (values) => {
     await dispatch(updateRound(round._id, { score: values.score }))
     if (values.finish) {
-      router.push('/result')
+      router.push('/rounds/[id]/result', `/rounds/${round._id}/result`)
     } else {
       router.push(
         { pathname: '/rounds/[id]', query: { h: values.nextIndex } },
