@@ -1,4 +1,7 @@
-const store = JSON.parse(localStorage.getItem('golfix') || '{}')
+let store = {}
+if (typeof localStorage !== 'undefined') {
+  store = JSON.parse(localStorage.getItem('golfix') || '{}')
+}
 
 export const get = (key: string) => {
   return store[key]

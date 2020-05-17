@@ -1,15 +1,31 @@
 import * as React from 'react'
-import { Button, AppBar, Toolbar } from '@material-ui/core'
+import { AppBar, Toolbar, makeStyles } from '@material-ui/core'
 
-import { Props } from 'containers/HeaderContainer'
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    borderRadius: 0,
+    height: 48,
+    background: theme.palette.common.white,
+    position: 'fixed',
+  },
+  toolbar: {
+    height: 48,
+    minHeight: 0,
+    justifyContent: 'center',
+    color: theme.palette.grey[800],
+  },
+}))
 
-const Header: React.FunctionComponent<Props> = (props) => {
-  const { classes, children } = props
+export type Props = {
+  classes?: ReturnType<typeof useStyles>
+}
+const Header: React.FC<Props> = (props) => {
+  const { children } = props
+  const classes = useStyles(props)
+
   return (
-    <AppBar position='fixed' className={classes.appbar} elevation={1}>
-      <Toolbar className={classes.toolbar}>
-        {children}
-      </Toolbar>
+    <AppBar position='relative' className={classes.appBar} elevation={1}>
+      <Toolbar className={classes.toolbar}>{children}</Toolbar>
     </AppBar>
   )
 }

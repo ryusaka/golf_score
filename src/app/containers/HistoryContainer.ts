@@ -2,61 +2,58 @@ import * as H from 'history'
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
 import { WithStyles } from '@material-ui/core'
-import {
-  withStyles,
-  createStyles,
-  Theme,
-} from '@material-ui/core'
+import { withStyles, createStyles, Theme } from '@material-ui/core'
 import { IFieldStore, IPlayerStore, IScoreStore } from 'lib/interfaces'
 
 import HistoryPage from 'components/History'
 import { removeHistory } from 'modules/score'
 
-const styles = (theme: Theme) => createStyles({
-  root: {
-    background: theme.palette.grey[200],
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    alignItems: 'center',
-    paddingTop: 60,
-    overflowY: 'scroll',
-  },
-  main: {
-    height: '100%',
-    marginTop: 5,
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: 5,
-  },
-  expansion: {
-    margin: '5px 10px',
-  },
-  border: {
-    border: `1px solid ${theme.palette.grey[300]}`,
-    borderRadius: 3,
-    marginBottom: 5,
-  },
-  footer: {
-    width: '100%',
-    padding: 10,
-  },
-  summary: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  date: {
-    color: theme.palette.grey[700],
-  },
-  toTop: {
-    marginTop: 10,
-  },
-  dialogFieldName: {
-    fontSize: 18,
-  },
-})
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      background: theme.palette.grey[200],
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      alignItems: 'center',
+      paddingTop: 60,
+      overflowY: 'scroll',
+    },
+    main: {
+      height: '100%',
+      marginTop: 5,
+    },
+    details: {
+      display: 'flex',
+      flexDirection: 'column',
+      padding: 5,
+    },
+    expansion: {
+      margin: '5px 10px',
+    },
+    border: {
+      border: `1px solid ${theme.palette.grey[300]}`,
+      borderRadius: 3,
+      marginBottom: 5,
+    },
+    footer: {
+      width: '100%',
+      padding: 10,
+    },
+    summary: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    date: {
+      color: theme.palette.grey[700],
+    },
+    toTop: {
+      marginTop: 10,
+    },
+    dialogFieldName: {
+      fontSize: 18,
+    },
+  })
 
 export interface State {
   remove: number
@@ -72,7 +69,4 @@ export interface Props extends WithStyles<typeof styles> {
   removeHistory: (index: number) => void
 }
 
-export default compose(
-  withStyles(styles),
-  connect(null, { removeHistory })
-)(HistoryPage)
+export default compose(withStyles(styles), connect(null, { removeHistory }))(HistoryPage)

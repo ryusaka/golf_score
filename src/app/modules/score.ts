@@ -1,7 +1,7 @@
 import { Action, Dispatch } from 'redux'
 import { IScores, IScoreStore, IPlayer } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
-import { ReduxState, store } from 'lib/store'
+import type { ReduxState } from 'lib/store'
 export type State = IScoreStore
 
 export enum ScoreActions {
@@ -11,8 +11,8 @@ export enum ScoreActions {
   BACK = 'score/back',
   MEDAL_SELECT = 'score/medalSelect',
   RESET = 'score/reset',
-  INCREMENT ='score/increment',
-  DECREMENT ='score/decrement',
+  INCREMENT = 'score/increment',
+  DECREMENT = 'score/decrement',
   FINISH = 'score/finish',
   SAVE = 'score/save',
   HISTORY_REMOVE = 'score/historyRemove',
@@ -24,7 +24,7 @@ export interface LoadAction extends Action {
 }
 export const load = (score: IScores) => {
   return (dispatch) => {
-    dispatch({type: ScoreActions.LOAD, score})
+    dispatch({ type: ScoreActions.LOAD, score })
   }
 }
 
@@ -35,7 +35,7 @@ interface IncrementAction extends Action {
 }
 export const increment = (player: IPlayer, hole: number) => {
   return (dispatch: Dispatch) => {
-    dispatch<IncrementAction>({type: ScoreActions.INCREMENT, player, hole})
+    dispatch<IncrementAction>({ type: ScoreActions.INCREMENT, player, hole })
   }
 }
 
@@ -46,7 +46,7 @@ interface DecrementAction extends Action {
 }
 export const decrement = (player: IPlayer, hole: number) => {
   return (dispatch: Dispatch) => {
-    dispatch<DecrementAction>({type: ScoreActions.DECREMENT, player, hole})
+    dispatch<DecrementAction>({ type: ScoreActions.DECREMENT, player, hole })
   }
 }
 
@@ -56,7 +56,7 @@ export interface LoadAllAction extends Action {
 }
 export const loadAll = (scores: IScores[]) => {
   return (dispatch: Dispatch) => {
-    dispatch<LoadAllAction>({type: ScoreActions.LOAD_ALL, scores})
+    dispatch<LoadAllAction>({ type: ScoreActions.LOAD_ALL, scores })
   }
 }
 
@@ -65,7 +65,7 @@ interface ForwardAction extends Action {
 }
 export const forward = () => {
   return (dispatch) => {
-    dispatch({type: ScoreActions.FORWARD})
+    dispatch({ type: ScoreActions.FORWARD })
   }
 }
 
@@ -74,7 +74,7 @@ interface BackAction extends Action {
 }
 export const back = () => {
   return (dispatch) => {
-    dispatch({type: ScoreActions.BACK})
+    dispatch({ type: ScoreActions.BACK })
   }
 }
 
@@ -86,7 +86,7 @@ interface MedalSelectAction extends Action {
 }
 export const medalSelect = (medal, player, hole) => {
   return (dispatch: Dispatch) => {
-    dispatch<MedalSelectAction>({type: ScoreActions.MEDAL_SELECT, medal, player, hole})
+    dispatch<MedalSelectAction>({ type: ScoreActions.MEDAL_SELECT, medal, player, hole })
   }
 }
 
@@ -97,7 +97,7 @@ interface ResetAction extends Action {
 export const reset = () => {
   return (dispatch: Dispatch, getState: () => ReduxState) => {
     const players = getState().player.players
-    dispatch<ResetAction>({type: ScoreActions.RESET, players})
+    dispatch<ResetAction>({ type: ScoreActions.RESET, players })
   }
 }
 
@@ -106,7 +106,7 @@ interface FinishAction extends Action {
 }
 export const finish = () => {
   return (dispatch: Dispatch) => {
-    dispatch<FinishAction>({type: ScoreActions.FINISH})
+    dispatch<FinishAction>({ type: ScoreActions.FINISH })
   }
 }
 
@@ -118,8 +118,8 @@ export const save = () => {
   return (dispatch: Dispatch, getState: () => ReduxState) => {
     const history = getStore('history') || []
     const currentStore = getState()
-    history.push(Object.assign({date: new Date()}, currentStore))
-    dispatch<SaveAction>({type: ScoreActions.SAVE, history})
+    history.push(Object.assign({ date: new Date() }, currentStore))
+    dispatch<SaveAction>({ type: ScoreActions.SAVE, history })
   }
 }
 
@@ -131,16 +131,27 @@ export const removeHistory = (index: number) => {
   return (dispatch: Dispatch) => {
     const history = getStore('history') || []
     history.splice(index, 1)
-    dispatch<HistoryRemoveAction>({type: ScoreActions.HISTORY_REMOVE, history})
+    dispatch<HistoryRemoveAction>({ type: ScoreActions.HISTORY_REMOVE, history })
   }
 }
 
-export type Actions = LoadAction | LoadAllAction | ForwardAction | BackAction | MedalSelectAction | ResetAction | IncrementAction | DecrementAction | FinishAction | SaveAction | HistoryRemoveAction
+export type Actions =
+  | LoadAction
+  | LoadAllAction
+  | ForwardAction
+  | BackAction
+  | MedalSelectAction
+  | ResetAction
+  | IncrementAction
+  | DecrementAction
+  | FinishAction
+  | SaveAction
+  | HistoryRemoveAction
 
 const init = (players) => {
-  const scores: IScores[] = players.map(p => ({
+  const scores: IScores[] = players.map((p) => ({
     player: p.id,
-    scores: new Array(9).fill(0).map(s => ({stroke: 1}))
+    scores: new Array(9).fill(0).map((s) => ({ stroke: 1 })),
   }))
   return {
     scores,
@@ -168,18 +179,18 @@ const reducer = (state: State = initialState, action: Actions): State => {
     case ScoreActions.FORWARD: {
       return {
         ...state,
-        now: state.now + 1
+        now: state.now + 1,
       }
     }
     case ScoreActions.BACK: {
       return {
         ...state,
-        now: state.now !== 0 ? state.now - 1 : state.now
+        now: state.now !== 0 ? state.now - 1 : state.now,
       }
     }
     case ScoreActions.INCREMENT: {
       const scores = state.scores
-      const idx = scores.findIndex(s => s.player === action.player.id)
+      const idx = scores.findIndex((s) => s.player === action.player.id)
       scores[idx].scores[action.hole - 1].stroke++
       const store = {
         ...state,
@@ -190,7 +201,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     }
     case ScoreActions.DECREMENT: {
       const scores = state.scores
-      const idx = scores.findIndex(s => s.player === action.player.id)
+      const idx = scores.findIndex((s) => s.player === action.player.id)
       if (scores[idx].scores[action.hole - 1].stroke > 1) {
         scores[idx].scores[action.hole - 1].stroke--
       }
@@ -203,7 +214,7 @@ const reducer = (state: State = initialState, action: Actions): State => {
     }
     case ScoreActions.MEDAL_SELECT: {
       const scores = state.scores
-      const idx = scores.findIndex(s => s.player === action.player.id)
+      const idx = scores.findIndex((s) => s.player === action.player.id)
       if (scores[idx].scores[action.hole - 1].medal === action.medal) {
         scores[idx].scores[action.hole - 1].medal = ''
       } else {
@@ -232,7 +243,8 @@ const reducer = (state: State = initialState, action: Actions): State => {
       setStore('history', action.history)
       return state
     }
-    default: return state
+    default:
+      return state
   }
 }
 

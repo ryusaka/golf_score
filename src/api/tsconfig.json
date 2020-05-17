@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2019.array"
+    ],
+    "target": "es2019",
+    "module": "commonjs",
+    "outDir": "../../dist/node",
+    "baseUrl": "./",
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true,
+
+    "sourceMap": true,
+
+    // Disallow inconsistently-cased references to the same file.
+    "forceConsistentCasingInFileNames": true,
+
+    // no emit errors around decorators for class.
+    "experimentalDecorators": true,
+
+    "incremental": true,
+
+    "noUnusedLocals": true,
+
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noImplicitThis": false,
+
+    "allowJs": true,
+    "paths": {
+      "@root/*": ["../../*"]
+    }
+  },
+  "include": [
+    "./**/*",
+    "../../config/*",
+    "../common/**/*",
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    "**/.DS_Store",
+    "**/*.d.ts"
+  ]
+}

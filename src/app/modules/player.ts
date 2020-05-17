@@ -1,5 +1,5 @@
 import { Action, Dispatch } from 'redux'
-import * as uuid from 'uuid/v4'
+import * as uuid from 'uuid'
 import { IPlayerStore, IPlayer, IScores } from 'lib/interfaces'
 import { set as setStore, get as getStore } from 'lib/storage'
 import { LoadAllAction as loadAllScoreAction, ScoreActions } from 'modules/score'
@@ -15,18 +15,20 @@ interface SetPlayerAction extends Action {
   players: IPlayer[]
 }
 
-export const set = (players: {name: string}[]) => {
+export const set = (players: { name: string }[]) => {
   return (dispatch: Dispatch) => {
-    const idAdded: IPlayer[] = players.filter(p => p.name).map(p => ({
-      name: p.name,
-      id: uuid(),
-    }))
-    dispatch<SetPlayerAction>({type: PlayerActions.SET_PLAYER, players: idAdded})
-    const scores: IScores[] = idAdded.map(p => ({
+    const idAdded: IPlayer[] = players
+      .filter((p) => p.name)
+      .map((p) => ({
+        name: p.name,
+        id: uuid.v4(),
+      }))
+    dispatch<SetPlayerAction>({ type: PlayerActions.SET_PLAYER, players: idAdded })
+    const scores: IScores[] = idAdded.map((p) => ({
       player: p.id,
-      scores: new Array(9).fill(0).map((_, idx) => ({stroke: 0})),
+      scores: new Array(9).fill(0).map(() => ({ stroke: 0 })),
     }))
-    dispatch<loadAllScoreAction>({type: ScoreActions.LOAD_ALL, scores})
+    dispatch<loadAllScoreAction>({ type: ScoreActions.LOAD_ALL, scores })
   }
 }
 
@@ -35,7 +37,7 @@ interface ResetAction extends Action {
 }
 export const reset = () => {
   return (dispatch: Dispatch) => {
-    dispatch<ResetAction>({type: PlayerActions.RESET})
+    dispatch<ResetAction>({ type: PlayerActions.RESET })
   }
 }
 
@@ -64,7 +66,8 @@ const reducer = (state: State = initialState, action: Actions): IPlayerStore => 
       setStore('player', store)
       return store
     }
-    default: return state
+    default:
+      return state
   }
 }
 

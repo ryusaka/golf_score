@@ -1,80 +1,80 @@
-import { Action, Dispatch } from 'redux'
-import { IFieldStore, IHole } from 'lib/interfaces'
-import { set as setStore, get as getStore } from 'lib/storage'
-export type State = IFieldStore
+import { Action } from 'redux'
+import { Field } from 'common/types/models'
+import { ThunkAction } from 'redux-thunk'
+import { client as axiosClient } from 'lib/axiosClient'
+import { RootState } from './reducer'
 
-export enum FieldActions {
-  LOAD = 'field/load',
-  SET_HOLE = 'field/setHole',
-  RESET = 'field/reset',
+export type State = {
+  field: Field.Model
+  fields: Field.Model[]
 }
+export const ActionTypes = {
+  LOAD: 'field/LOAD',
+  LOAD_ALL: 'field/LOAD_ALL',
+  CREATE_COURSE: 'field/CREATE_COURSE',
+} as const
 
-interface LoadAction extends Action {
-  type: FieldActions.LOAD
-  name: string
+type LoadAction = Action<typeof ActionTypes.LOAD> & {
+  field: Field.Model
 }
+export const createLoadAction = (field: Field.Model): LoadAction => ({
+  type: ActionTypes.LOAD,
+  field,
+})
 
-export const load = (name: string) => {
-  return (dispatch: Dispatch) => {
-    dispatch<LoadAction>({type: FieldActions.LOAD, name})
+type LoadAllAction = Action<typeof ActionTypes.LOAD_ALL> & {
+  fields: Field.Model[]
+}
+export const createLoadAllAction = (fields: Field.Model[]): LoadAllAction => ({
+  type: ActionTypes.LOAD_ALL,
+  fields,
+})
+
+export const loadAll = (): ThunkAction<void, RootState, typeof axiosClient, LoadAllAction> => {
+  return async (dispatch, getState, client) => {
+    const res = await client.get('/api/fields')
+    dispatch(createLoadAllAction(res.data.fields))
   }
 }
 
-interface SetHoleAction extends Action {
-  type: FieldActions.SET_HOLE
-  holes: IHole[]
-}
-
-export const setHole = (holes: IHole[]) => {
-  return (dispatch: Dispatch) => {
-    dispatch<SetHoleAction>({type: FieldActions.SET_HOLE, holes})
+export const load = (id): ThunkAction<void, RootState, typeof axiosClient, LoadAction> => {
+  return async (dispatch, getState, client) => {
+    const res = await client.get(`/api/fields/${id}`)
+    dispatch(createLoadAction(res.data.field))
   }
 }
 
-interface ResetAction extends Action {
-  type: FieldActions.RESET
-}
-export const reset = () => {
-  return (dispatch: Dispatch) => {
-    dispatch<ResetAction>({type: FieldActions.RESET})
+export const createCourse = (fieldId, data): ThunkAction<void, RootState, typeof axiosClient, LoadAction> => {
+  return async (dispatch, getState, client) => {
+    const res = await client.post(`/api/fields/${fieldId}/courses`, data)
+    dispatch(createLoadAction(res.data.field))
   }
 }
 
-export type Actions = LoadAction | SetHoleAction | ResetAction
+type Actions = LoadAction | LoadAllAction
 
-const init = () => {
-  return {
-    name: '',
-    holes: [...new Array(9)].fill(1).map((_, idx) => ({number: idx + 1, par: 4})),
-  }
+const initialState = {
+  field: null,
+  fields: [],
 }
 
-const initialState = getStore('field') || init()
-
-const reducer = (state: State = initialState, action: Actions): IFieldStore => {
+const reducer = (state: State = initialState, action: Actions): State => {
   switch (action.type) {
-    case FieldActions.LOAD: {
-      const store = {
+    case ActionTypes.LOAD_ALL: {
+      return {
         ...state,
-        name: action.name,
+        fields: action.fields,
       }
-      setStore('field', store)
-      return store
     }
-    case FieldActions.SET_HOLE: {
-      const store =  {
+    case ActionTypes.LOAD: {
+      return {
         ...state,
-        holes: action.holes,
+        field: action.field,
       }
-      setStore('field', store)
-      return store
     }
-    case FieldActions.RESET: {
-      const store = init()
-      setStore('field', store)
-      return store
+    default: {
+      return state
     }
-    default: return state
   }
 }
 

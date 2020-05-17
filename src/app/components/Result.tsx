@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Props } from 'containers/ResultContainer'
-import Header from 'containers/HeaderContainer'
+import Header from 'components/Header'
 import ScoreResult from 'containers/ScoreResultContainer'
 import MedalResult from 'containers/MedalResultContainer'
 import ResultFooter from 'containers/ResultFooterContainer'
@@ -10,7 +10,9 @@ const Result: React.FunctionComponent<Props> = (props) => {
 
   return (
     <div className={classes.root}>
-      <Header><h1 style={{fontSize: 24}}>RESULT</h1></Header>
+      <Header>
+        <h1 style={{ fontSize: 24 }}>RESULT</h1>
+      </Header>
       <div className={classes.main}>
         <h3 className={classes.title}>スコア</h3>
         <ScoreResult scores={scores} players={players} field={field} />

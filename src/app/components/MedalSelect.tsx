@@ -7,8 +7,7 @@ import { State, Props } from 'containers/MedalSelectContainer'
 export default class Score extends React.Component<Props, State> {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   getClassName = (medal) => {
@@ -24,7 +23,7 @@ export default class Score extends React.Component<Props, State> {
     const { classes, player, medalSelect, hole, score } = this.props
     return (
       <div className={classes.olympic}>
-        {['D', '金', '銀', '銅', '鉄'].map(medal =>
+        {['D', '金', '銀', '銅', '鉄'].map((medal) => (
           <Avatar
             key={medal}
             onClick={() => medalSelect(medal, player, hole)}
@@ -32,7 +31,7 @@ export default class Score extends React.Component<Props, State> {
           >
             {medal}
           </Avatar>
-        )}
+        ))}
       </div>
     )
   }

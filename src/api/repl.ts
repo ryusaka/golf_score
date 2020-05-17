@@ -5,21 +5,19 @@ import * as models from './models'
 const HISTORY_DIRECTORY = __dirname + '/.ym_history'
 let history
 try {
-  history = fs.readFileSync(HISTORY_DIRECTORY, {encoding: 'utf-8'})
+  history = fs.readFileSync(HISTORY_DIRECTORY, { encoding: 'utf-8' })
 } catch (e) {
   history = ''
 }
 
-import * as mongoose from 'mongoose'
-mongoose.Promise = global.Promise
 import mongo from './lib/mongo'
 
-mongo().then(mongoose => {
+mongo().then((mongoose) => {
   console.log('REPL with async/await and mongoose! 🐍')
-  const replInstance = repl.start({prompt: '> ', terminal: true})
+  const replInstance = repl.start({ prompt: '> ', terminal: true })
   // @ts-ignore
   replInstance.history = history.split('\n')
-  for (let key of Object.keys(models)) {
+  for (const key of Object.keys(models)) {
     replInstance.context[key] = models[key]
   }
 

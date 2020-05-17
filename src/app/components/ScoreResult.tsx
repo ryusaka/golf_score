@@ -6,7 +6,7 @@ import { Props } from 'containers/ScoreResultContainer'
 
 const Result: React.FunctionComponent<Props> = (props) => {
   const { scores, players, field, elevation = 1, classes } = props
-  const getClass = medal => {
+  const getClass = (medal) => {
     if (medal === 'D') return classes.diamond
     if (medal === '金') return classes.gold
     if (medal === '銀') return classes.silver
@@ -24,23 +24,29 @@ const Result: React.FunctionComponent<Props> = (props) => {
               <div>HOLE</div>
               <div>(PAR)</div>
             </TableCell>
-            {new Array(9).fill(0).map((_, idx) =>
+            {new Array(9).fill(0).map((_, idx) => (
               <TableCell key={idx} className={classes.score}>
                 <div>{idx + 1}</div>
                 <div>({field.holes[idx].par})</div>
               </TableCell>
-            )}
+            ))}
             <TableCell className={classes.total}>計</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {scores.map(score => (
+          {scores.map((score) => (
             <TableRow key={score.player} className={classes.row}>
               <TableCell className={classes.name} component='th' scope='row'>
-                {players.find(p => p.id === score.player).name}
+                {players.find((p) => p.id === score.player).name}
               </TableCell>
-              {score.scores.map((s, i) => <TableCell key={i} className={classes.score} align='right'>{s.medal ? <Avatar className={clsx(getClass(s.medal), classes.medal)}>{s.stroke}</Avatar> : s.stroke}</TableCell>)}
-              <TableCell className={classes.total}>{score.scores.reduce((prev, curr) => prev + curr.stroke, 0)}</TableCell>
+              {score.scores.map((s, i) => (
+                <TableCell key={i} className={classes.score} align='right'>
+                  {s.medal ? <Avatar className={clsx(getClass(s.medal), classes.medal)}>{s.stroke}</Avatar> : s.stroke}
+                </TableCell>
+              ))}
+              <TableCell className={classes.total}>
+                {score.scores.reduce((prev, curr) => prev + curr.stroke, 0)}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

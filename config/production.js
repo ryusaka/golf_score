@@ -6,6 +6,6 @@ module.exports = {
       useNewUrlParser: true,
     },
   },
-  webOrigin: 'http://localhost:11000',
+  webOrigin: 'http://localhost:3232',
   static: 'dist',
 }

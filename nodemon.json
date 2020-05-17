@@ -1,0 +1,12 @@
+{
+  "restartable": "rs",
+  "watch": [
+    "dist/node/src/api/lib/",
+    "dist/node/src/api/models/",
+    "dist/node/src/api/routes/",
+    "dist/node/src/api/ssr/",
+    "dist/node/src/api/*.js"
+  ],
+  "delay": "2s",
+  "exec": "node dist/node/src/api/server.js"
+}

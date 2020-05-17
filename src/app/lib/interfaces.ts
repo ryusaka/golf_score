@@ -6,7 +6,7 @@ export interface IScoreStore {
 
 export interface IScores {
   scores: IScore[]
-  player: string,
+  player: string
 }
 
 export interface IScore {
