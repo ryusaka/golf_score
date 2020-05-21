@@ -1,18 +1,19 @@
 import * as React from 'react'
 import moment from 'moment'
 import { useRouter } from 'next/router'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import {
   makeStyles,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
-  Divider,
-  ExpansionPanelActions,
   Button,
+  CircularProgress,
   Dialog,
-  DialogContent,
   DialogActions,
+  DialogContent,
+  Divider,
+  ExpansionPanel,
+  ExpansionPanelActions,
+  ExpansionPanelDetails,
+  ExpansionPanelSummary,
 } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
@@ -20,8 +21,8 @@ import HeaderContainer from 'components/HeaderContainer'
 import RoundResult from 'components/RoundResult'
 import MedalTable from 'components/MedalTable'
 
-import { loadAll as loadAllHistory } from 'modules/round'
-import { RootState } from 'modules/reducer'
+import { loadAll as loadAllRound, remove as removeRound } from 'modules/round'
+import { RootState, useAppDispatch } from 'modules/reducer'
 
 import type { Course as CourseType } from 'common/types/models'
 
@@ -70,53 +71,62 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 18,
   },
 }))
-const HistoryPage = (props) => {
-  const { removeHistory = () => null } = props
+
+type Props = {}
+
+const HistoryPage: React.FC<Props> = () => {
   const classes = useStyles()
   const router = useRouter()
-  const [removeIndex, setRemoveIndex] = React.useState(-1)
+  const [removeId, setRemoveId] = React.useState(null)
+  const [loading, setLoading] = React.useState(true)
   const rounds = useSelector((state: RootState) => state.round.rounds)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
-    dispatch(loadAllHistory())
+    console.log('useEffect')
+    dispatch(loadAllRound()).then(() => setLoading(false))
   }, [])
 
-  const remove = () => {
-    removeHistory(removeIndex)
-    setRemoveIndex(-1)
+  const remove = async () => {
+    await dispatch(removeRound(removeId))
+    await dispatch(loadAllRound())
+    setRemoveId(null)
   }
 
   return (
     <>
       <HeaderContainer className={classes.root} header={<h2 style={{ fontSize: 24 }}>ラウンド履歴</h2>}>
         <div className={classes.main}>
-          {rounds.map((r, idx) => (
-            <ExpansionPanel key={moment(r.date).toString()} className={classes.expansion}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <div className={classes.summary}>
-                  <div>{r.course.name}</div>
-                  <div className={classes.date}>{moment(r.date).format('YYYY-MM-DD')}</div>
-                </div>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails className={classes.details}>
-                <h3>スコア</h3>
-                <div className={classes.border}>
-                  <RoundResult round={r} course={r.course as CourseType.Model} />
-                </div>
-                <h3>オリンピック</h3>
-                <div className={classes.border}>
-                  <MedalTable score={r.score} />
-                </div>
-              </ExpansionPanelDetails>
-              <Divider />
-              <ExpansionPanelActions>
-                <Button onClick={() => setRemoveIndex(idx)} size='small'>
-                  削除
-                </Button>
-              </ExpansionPanelActions>
-            </ExpansionPanel>
-          ))}
+          {loading ? (
+            <CircularProgress color='secondary' />
+          ) : (
+            rounds.map((r) => (
+              <ExpansionPanel key={moment(r.date).toString()} className={classes.expansion}>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <div className={classes.summary}>
+                    <div>{r.course.name}</div>
+                    <div className={classes.date}>{moment(r.date).format('YYYY-MM-DD')}</div>
+                  </div>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails className={classes.details}>
+                  <h3>スコア</h3>
+                  <div className={classes.border}>
+                    <RoundResult round={r} course={r.course as CourseType.Model} />
+                  </div>
+                  <h3>オリンピック</h3>
+                  <div className={classes.border}>
+                    <MedalTable score={r.score} />
+                  </div>
+                </ExpansionPanelDetails>
+                <Divider />
+                <ExpansionPanelActions>
+                  <Button onClick={() => setRemoveId(r._id)} size='small'>
+                    削除
+                  </Button>
+                </ExpansionPanelActions>
+              </ExpansionPanel>
+            ))
+          )}
           <div className={classes.footer}>
             <Button
               className={classes.toTop}
@@ -130,17 +140,18 @@ const HistoryPage = (props) => {
           </div>
         </div>
       </HeaderContainer>
-      <Dialog open={removeIndex !== -1} onClose={() => setRemoveIndex(-1)}>
-        {removeIndex !== -1 && (
+      <Dialog open={!!removeId} onClose={() => setRemoveId(null)}>
+        {removeId && (
           <DialogContent>
             <div className={classes.dialogFieldName}>
-              {rounds[removeIndex].course.name}({moment(rounds[removeIndex].date).format('YYYY-MM-DD')})
+              {rounds.find((r) => r._id === removeId)?.course.name}(
+              {moment(rounds.find((r) => r._id === removeId)?.date).format('YYYY-MM-DD')})
             </div>
             <div>のスコアを削除しますか？</div>
           </DialogContent>
         )}
         <DialogActions>
-          <Button onClick={() => setRemoveIndex(-1)}>キャンセル</Button>
+          <Button onClick={() => setRemoveId(null)}>キャンセル</Button>
           <Button variant='contained' onClick={remove}>
             削除する
           </Button>

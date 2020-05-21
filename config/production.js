@@ -8,5 +8,4 @@ module.exports = {
     },
   },
   webOrigin: 'http://localhost:3232',
-  static: '../../../../src/static',
 }

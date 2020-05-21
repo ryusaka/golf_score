@@ -19,7 +19,8 @@ const create = async (req, res) => {
   const exists = await Field.findOne({ name })
   if (exists) return res.status(400).json({ message: 'Already exists' })
   const field = await fieldConfig.create({ name, courses: [] })
-  res.json({ field })
+  const response = await fieldConfig.get(field._id)
+  res.json({ field: response })
 }
 
 const createCourse = async (req, res) => {

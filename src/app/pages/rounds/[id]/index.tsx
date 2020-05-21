@@ -24,8 +24,8 @@ const Round: React.FC<Prop> = () => {
   }, [])
 
   const submit: FormProps['onSubmit'] = async (values) => {
-    await dispatch(updateRound(round._id, { score: values.score, finish: values.finish }))
-    if (values.finish) {
+    dispatch(updateRound(round._id, { score: values.score, finished: values.finished }))
+    if (values.finished) {
       router.push('/rounds/[id]/result', `/rounds/${round._id}/result`)
     } else {
       router.push(

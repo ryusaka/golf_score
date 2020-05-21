@@ -12,6 +12,7 @@ import HeaderContainer from 'components/HeaderContainer'
 
 import type { Field as FieldType, Course as CourseType } from 'common/types/models'
 import { NewCourseFormDialog } from 'components/NewCourse'
+import { NewFieldFormDialog } from 'components/NewField'
 import { useRouter } from 'next/router'
 
 type Props = {
@@ -30,6 +31,7 @@ const useRootStyles = makeStyles(() => ({
 
 const Setup: React.FC<Props> = (props) => {
   const [addCourse, setAddCourse] = React.useState(false)
+  const [addField, setAddField] = React.useState(false)
   const [selected, setSelected] = React.useState<Parameters<CourseChoiceProps['onSelect']>[0]>(null)
   const courses = useSelector((state: RootState) => state.course.courses)
   const fields = useSelector((state: RootState) => state.field.fields)
@@ -46,6 +48,11 @@ const Setup: React.FC<Props> = (props) => {
     setSelected(values)
   }
 
+  const afterCreateNewField = async () => {
+    setAddField(false)
+    await dispatch(loadFields())
+    await dispatch(loadCourses())
+  }
   const afterCreateNewCourse = async () => {
     setAddCourse(false)
     await dispatch(loadFields())
@@ -76,14 +83,23 @@ const Setup: React.FC<Props> = (props) => {
       <Typography className={classes.subtitle} variant='subtitle1'>
         一覧にない時
       </Typography>
-      <Button variant='outlined' color='secondary' onClick={() => setAddCourse(true)}>
+      <Button style={{ marginRight: 8 }} variant='outlined' color='secondary' onClick={() => setAddCourse(true)}>
         コースを追加する
+      </Button>
+      <Button variant='outlined' color='primary' onClick={() => setAddField(true)}>
+        ゴルフ場を追加する
       </Button>
       <NewCourseFormDialog
         afterSubmit={afterCreateNewCourse}
         responsive
         fields={fields}
         open={addCourse}
+        onClose={() => setAddCourse(false)}
+      />
+      <NewFieldFormDialog
+        afterSubmit={afterCreateNewField}
+        responsive
+        open={addField}
         onClose={() => setAddCourse(false)}
       />
       <Button

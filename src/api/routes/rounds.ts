@@ -54,4 +54,11 @@ const update = async (req, res) => {
   return show(req, res)
 }
 
-export { index, show, create, update, playing }
+const remove = async (req, res) => {
+  const exists = await Round.exists({ _id: req.params.id, user: req.user._id })
+  if (!exists) return res.status(404).json({ message: 'not found' })
+  await Round.deleteOne({ _id: req.params.id })
+  res.json({})
+}
+
+export { index, show, create, update, playing, remove }

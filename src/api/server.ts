@@ -94,6 +94,7 @@ apiRouter
   .post('/login', partialAuth, wrap(users.login))
   .post('/sign-up', wrap(users.signUp))
   .get('/fields', wrap(fields.index))
+  .post('/fields', wrap(fields.create))
   .get('/fields/:id', wrap(fields.show))
   .get('/fields/:id/courses', wrap(courses.index))
   .post('/fields/:id/courses', wrap(fields.createCourse))
@@ -105,6 +106,7 @@ apiRouter
   .get('/rounds/playing', authenticate, wrap(rounds.playing))
   .get('/rounds/:id', authenticate, wrap(rounds.show))
   .put('/rounds/:id', authenticate, wrap(rounds.update))
+  .delete('/rounds/:id', authenticate, wrap(rounds.remove))
 
 server.use('/api', apiRouter)
 server.get('*', partialAuth, (req, res) => {

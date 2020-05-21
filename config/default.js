@@ -17,7 +17,7 @@ module.exports = {
     },
     replaceConsole: true,
   },
-  static: 'src/static',
+  static: '../../../../src/static',
   sitemap: {
     path: '/tmp',
   },

@@ -79,13 +79,13 @@ export type Props = {
   course: CourseType.Model
   round: RoundType.Model
   currentHole: number
-  onSubmit: (values: Pick<Fields, 'nextIndex' | 'finish'> & { score: ReturnType<typeof updateScore> }) => any
+  onSubmit: (values: Pick<Fields, 'nextIndex' | 'finished'> & { score: ReturnType<typeof updateScore> }) => any
 }
 
 export type Fields = {
   scores: FieldValues[]
   nextIndex?: number
-  finish?: boolean
+  finished?: boolean
 }
 
 const Round: React.FC<Props> = (props) => {
@@ -101,7 +101,7 @@ const Round: React.FC<Props> = (props) => {
   const submit = (values: Fields) => {
     return onSubmit({
       nextIndex: values.nextIndex,
-      finish: values.finish,
+      finished: values.finished,
       score: updateScore(round.score, values, currentHole - 1),
     })
   }
@@ -134,7 +134,7 @@ const Round: React.FC<Props> = (props) => {
                 color='secondary'
                 variant='contained'
                 type='submit'
-                onClick={() => form.change('finish', true)}
+                onClick={() => form.change('finished', true)}
               >
                 終了
               </Button>

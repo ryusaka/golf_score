@@ -78,6 +78,13 @@ export const moveHole = (to: number): ThunkAction<MoveHoleAction, RootState, typ
   }
 }
 
+export const remove = (id): ThunkAction<any, RootState, typeof axiosClient, any> => {
+  return async (dispatch, getState, client) => {
+    const res = await client.delete(`/api/rounds/${id}`)
+    return dispatch(createLoadAction(res.data.round))
+  }
+}
+
 type Actions = LoadAllAction | LoadAction | MoveHoleAction
 
 const initialState = {

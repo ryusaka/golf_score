@@ -44,6 +44,13 @@ export const load = (id): ThunkAction<void, RootState, typeof axiosClient, LoadA
   }
 }
 
+export const create = (data): ThunkAction<void, RootState, typeof axiosClient, LoadAction> => {
+  return async (dispatch, getState, client) => {
+    const res = await client.post('/api/fields', data)
+    dispatch(createLoadAction(res.data.field))
+  }
+}
+
 export const createCourse = (fieldId, data): ThunkAction<void, RootState, typeof axiosClient, LoadAction> => {
   return async (dispatch, getState, client) => {
     const res = await client.post(`/api/fields/${fieldId}/courses`, data)
