@@ -4,6 +4,7 @@ module.exports = {
     uri: 'mongodb://localhost:27017/golfix',
     options: {
       useNewUrlParser: true,
+      useCreateIndex: true,
     },
   },
   webOrigin: 'http://localhost:11111',

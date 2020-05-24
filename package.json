@@ -6,10 +6,10 @@
     "mongo": "node --experimental-repl-await dist/node/src/api/repl.js",
     "lint": "eslint -c ./.eslintrc.js 'src/**/*.{ts,tsx}'",
     "start": "node ./dist/node/src/api/server.js",
-    "build": "run-s build:tsc build:next start",
+    "build": "run-s build:tsc build:next",
     "build:tsc": "tsc -p ./src/api/tsconfig.json",
     "build:next": "next build src/app",
-    "heroku-postbuild": "run-s build:tsc build:next start"
+    "heroku-postbuild": "start"
   },
   "dependencies": {
     "@material-ui/core": "^4.9.12",
